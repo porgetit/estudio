@@ -1,0 +1,17 @@
+Infija
+
+a * b / (a + b)
+a * b / a + b
+(a - b) ^ c + d
+
+Prefija
+
+/ * a b + a c
++ / * a b a c
++ ^ - a b c d
+
+Posfija
+
+a b * a b + /
+c a b * a / +
+d b a - c ^ +
