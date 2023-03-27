@@ -18,6 +18,7 @@ void push(Stack*, DataType);
 DataType pop(Stack*);
 bool empty(Stack*);
 void clear(Stack*);
+DataType top(Stack*);
 
 void push(Stack* stack, DataType atom) {
     Node* newNode = new Node;
@@ -52,4 +53,8 @@ void clear(Stack* stack) {
     while (!empty(stack)) {
         pop(stack);
     }
+}
+
+DataType top(Stack* stack) {
+    return stack->top->data;
 }
