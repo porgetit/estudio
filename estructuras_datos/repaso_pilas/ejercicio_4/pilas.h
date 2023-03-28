@@ -1,13 +1,12 @@
-/*
-Pudeo añadir un campo (index) a la estructura Node para poder llevar un registro sencillo del número de nodos de la pila. 
-*/
+#ifndef PILAS_H
+#define PILAS_H
 
 #include <iostream>
 #include <cstdlib>
 
 using namespace std;
 
-typedef int DataType;
+typedef char DataType;
 
 typedef struct Node {
     DataType data;
@@ -72,3 +71,5 @@ DataType top(Stack* stack) {
 int size(Stack* stack) {
     return len;
 }
+
+#endif

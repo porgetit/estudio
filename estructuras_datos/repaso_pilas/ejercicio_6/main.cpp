@@ -4,14 +4,25 @@ Implemente una solución (usando pilas) que le permita evaluar expresiones en no
 
 #include <iostream>
 #include <cstdlib>
-#include "pilas.h"
+#include <cstring>
+#include <cctype>
+#include "./utilidades/pilas.h"
+#include "./utilidades/utilidades.h"
 
 using namespace std;
 
 int main() {
     Stack expresion_invertida;
-    Stack contenedor;
+    Stack contenedor; // Espacio en el que se almacenarán los resultados
 
+    char expresion[] = "/ + * 5 3 - 81 23 100";
+
+    expresion_invertida = string_tools::splitPrefixExpression(expresion);
+
+    // Desempilar y evaluar
+    while(!empty(&expresion_invertida)) {
+        if () // Evaluar si es número y almacenarlo sino, si es operador y almacenar el resultado
+    }
 
     return 0;
 }
