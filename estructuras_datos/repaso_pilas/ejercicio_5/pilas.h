@@ -1,7 +1,3 @@
-/*
-Pudeo añadir un campo (index) a la estructura Node para poder llevar un registro sencillo del número de nodos de la pila. 
-*/
-
 #include <iostream>
 #include <cstdlib>
 
