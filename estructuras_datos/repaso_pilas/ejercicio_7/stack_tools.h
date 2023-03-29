@@ -85,6 +85,8 @@ public:
 
     /**
      * @brief Este método verifica si la pila está vacía.
+     * 
+     * @todo Cambiar por verificación por tamaño, para evitar problemas de operadores
     */
     static bool empty(Stack* stack) {
         if (stack->top == NULL) {
