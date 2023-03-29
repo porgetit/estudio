@@ -4,10 +4,11 @@ Puedo añadir un campo (index) a la estructura Node para poder llevar un registr
 
 #include <iostream>
 #include <cstdlib>
+#include <string>
 
 using namespace std;
 
-typedef const char* DataType;
+typedef string DataType;
 
 typedef struct Node {
     DataType data;

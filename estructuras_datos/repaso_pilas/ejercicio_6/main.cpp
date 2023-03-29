@@ -4,26 +4,62 @@ Implemente una solución (usando pilas) que le permita evaluar expresiones en no
 
 #include <iostream>
 #include <cstdlib>
-#include <cstring>
-#include <cctype>
-#include "./utilidades/pilas.h"
+#include <string>
+#include <vector>
+#include "./pilas/pilas.h"
 #include "./utilidades/utilidades.h"
 
 using namespace std;
 
 int main() {
     Stack expresion_invertida;
-    Stack contenedor; // Espacio en el que se almacenarán los resultados
+    expresion_invertida.top = NULL;
+    Stack contenedor;
+    contenedor.top == NULL;
 
-    char expresion[] = "/ + * 5 3 - 81 23 100";
+    string input = "* 10 * 2 ^ 2 3";
+    vector<string> output;
 
-    expresion_invertida = string_tools::splitPrefixExpression(expresion);
+    output = string_tools::splitString(input, ' ');
 
-    // Desempilar y evaluar
-    while(!empty(&expresion_invertida)) {
-        if () // Evaluar si es número y almacenarlo sino, si es operador y almacenar el resultado
+    // Empilamos la cadena para evaluarla.
+    for (int index = 0; index < output.size(); index++) {
+        DataType atom = (DataType) output[index];
+        push(&expresion_invertida, atom);
     }
 
+    // Desempilamos y evaluamos
+    while (!empty(&expresion_invertida)) {
+        string atom = (string) pop(&expresion_invertida);
+        
+        if (string_tools::isNumber(atom)) {
+            push(&contenedor, atom);
+        } else if (string_tools::isBinaryOperator(atom)) {
+            int subAtom_1 = stoi(pop(&contenedor));
+            int subAtom_2 = stoi(pop(&contenedor));
+            int temp = 0;
+
+            if (atom[0] == '+') {
+                temp = subAtom_1 + subAtom_2;
+            } else if (atom[0] == '-') {
+                temp = subAtom_1 - subAtom_2;
+            } else if (atom[0] == '*') {
+                temp = subAtom_1 * subAtom_2;
+            } else if (atom[0] == '/') {
+                temp = subAtom_1 / subAtom_2;
+            } else if (atom[0] == '^') {
+                temp = 1;
+                for (int i = 0; i < subAtom_2; i++)  {
+                    temp *= subAtom_1;
+                }
+            }
+
+            DataType result = to_string(temp);
+            push(&contenedor, result);
+        }
+    }
+
+    cout << "Resultado: " << pop(&contenedor) << endl;
     return 0;
 }
 
