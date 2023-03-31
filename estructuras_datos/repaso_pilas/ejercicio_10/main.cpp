@@ -51,5 +51,9 @@ int main() {
         cout << "La expresión esta balanceada." << endl;
     }
 
+    /*
+    Hasta este punto, funciona el análisis de balance para paréntesis
+    */
+
     return 0;
 }
