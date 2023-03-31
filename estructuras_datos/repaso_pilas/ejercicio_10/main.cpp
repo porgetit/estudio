@@ -15,10 +15,10 @@ using namespace std;
 
 int main() {
     // Definimos nuestra expresión
-    string cadena = "()(()())()";
+    string cadena = "([2 + 5] * 7 + (3 + 9))";
 
     // Definimos los caracteres que nos sirven
-    vector<char> util_chars = {'(', ')'};
+    vector<char> util_chars = {'(', ')', '{', '}', '[', ']'};
 
     // Eliminamos todo lo que no nos sea útil
     string_tools strings_driver;
@@ -31,28 +31,45 @@ int main() {
     for (int index = 0; index < cadena.size(); index++) {
         try
         {
-            if (cadena[index] == '(') {
-                stacks_driver.push(&contenedor, '(');
-            } else {
+            if (cadena[index] == '(' || cadena[index] == '{' || cadena[index] == '[') {
+                stacks_driver.push(&contenedor, cadena[index]);
+            } else if ((cadena[index] == ')' && stacks_driver.peek(&contenedor) == '(') || (cadena[index] == '}' && stacks_driver.peek(&contenedor) == '{') || (cadena[index] == ']' && stacks_driver.peek(&contenedor) == '[')) {
                 stacks_driver.pop(&contenedor);
             }
         }
         catch(runtime_error& e)
         {   
-            cerr << "Falta un paréntesis de apertura." << endl;
+            if (cadena[index] == ')') {
+                cerr << "Falta un paréntesis de apertura." << endl;
+            } else if (cadena[index] == '}') {
+                cerr << "Falta un corchete de apertura." << endl;
+            } else {
+                cerr << "Falta un corchete cuadrado de apertura." << endl;
+            }
             exit(1);
         }        
     }
 
     if (!stacks_driver.empty(&contenedor)) {
-        cerr << "Falta un paréntesis de cierre." << endl;
-        stacks_driver.clear(&contenedor);
+        char temp = stacks_driver.pop(&contenedor);
+
+        if (temp == '(') {
+            cerr << "Falta un paréntesis de cierre." << endl;
+        } else if (temp == '{') {
+            cerr << "Falta un corchete de cierre." << endl;
+        } else {
+            cerr << "Falta un corchete cuadrado de cierre." << endl;
+        }
+        
+        exit(1);
     } else {
         cout << "La expresión esta balanceada." << endl;
     }
 
     /*
-    Hasta este punto, funciona el análisis de balance para paréntesis
+    Hasta este punto, existe un error lógico:
+
+        La expresion "()(()()(())))" la evalúa como balanceada. Falta un paréntesis de apertura.
     */
 
     return 0;
