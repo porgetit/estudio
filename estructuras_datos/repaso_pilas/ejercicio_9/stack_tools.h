@@ -44,10 +44,9 @@ public:
         Node* top;
     } Stack;
 
-    // stack_tools() {
-    //     this->size_ = 0;
-    // }
-
+    /**
+     * @brief Este método inicializa y devulve una pila vacía
+    */
     static Stack init_stack() {
         Stack stack;
         stack.top = NULL;

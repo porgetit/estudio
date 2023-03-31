@@ -50,6 +50,7 @@ public:
 
     static Stack init_stack() {
         Stack stack;
+        stack.top = NULL;
         return stack;
     }
 
@@ -122,8 +123,17 @@ public:
      * @brief Este método retorna el largo de la pila.
      * @todo Debo hacer que este método recorra la pila (stack) contando el número de nodos y retorne el número de nodos
     */
-    int size() {
-        return 0;
+    static int size(Stack* stack) {
+        int len = 0;
+        
+        Node* currentNode = stack->top;
+
+        while (currentNode->next != NULL) {
+            len++;
+            currentNode = currentNode->next;
+        }
+        
+        return len;
     }
 };
 

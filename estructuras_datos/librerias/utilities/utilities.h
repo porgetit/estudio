@@ -1,8 +1,11 @@
-#ifndef STACK_TOOLS_H
-#define STACK_TOOLS_H
+#ifndef UTILIDADES_H
+#define UTILIDADES_H
 
 #include <iostream>
 #include <cstdlib>
+#include <string>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -73,7 +76,7 @@ public:
     */
     static DataType pop(Stack* stack) {
         if (empty(stack)) {
-            throw std::runtime_error("Pila vacia");
+            throw std::runtime_error("No puede extraer elementos de una pila vacía");
         }
 
         Node* eliminatedNode = stack->top;
@@ -85,16 +88,33 @@ public:
     }
 
     /**
+     * @brief Este método retorna el largo de la pila.
+     * @todo Debo hacer que este método recorra la pila (stack) contando el número de nodos y retorne el número de nodos
+    */
+    static int size(Stack* stack) {
+        int len = 0;
+        
+        Node* currentNode = stack->top;
+
+        while (currentNode != NULL) {
+            len++;
+            currentNode = currentNode->next;
+        }
+        
+        return len;
+    }
+
+    /**
      * @brief Este método verifica si la pila está vacía.
      * 
      * @todo Cambiar por verificación por tamaño, para evitar problemas de operadores
     */
     static bool empty(Stack* stack) {
-        if (stack->top == NULL) {
-            return true;
+        if (size(stack) != 0) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -104,7 +124,7 @@ public:
     */
     static void clear(Stack* stack) {
         if (empty(stack)) {
-            throw std::runtime_error("Pila vacia");
+            throw std::runtime_error("No puede limpiar una pila vacía");
         }
 
         while (!empty(stack)) {
@@ -120,21 +140,87 @@ public:
     }
 
     /**
-     * @brief Este método retorna el largo de la pila.
-     * @todo Debo hacer que este método recorra la pila (stack) contando el número de nodos y retorne el número de nodos
+     * @brief Este método imprime la pila completa sin modificarla.
+     * @todo Agregar soporte de rangos
     */
-    static int size(Stack* stack) {
-        int len = 0;
-        
+    static vector<DataType> return_stack(Stack* stack) { 
+        vector<DataType> content;
+
         Node* currentNode = stack->top;
 
-        while (currentNode->next != NULL) {
-            len++;
+        while (currentNode != NULL) {
+            content.push_back(currentNode->data);
             currentNode = currentNode->next;
         }
-        
-        return len;
-    }
+
+        return content;
+   }
 };
 
+class string_tools {
+public:
+
+    void filterString(string& input, vector<char> allowed_chars) {
+        for (int index = 0; index < input.size(); index++) {
+            char element = input[index];
+            
+            if (!inVectorFindElement(element, allowed_chars)) {
+                input.erase(index, 1);
+            }
+        }
+    }
+
+    bool inVectorFindElement(char elemento, vector<char>& container) {
+        for (int i = 0; i < container.size(); i++) {
+            if (container[i] == elemento) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // splitString(string, char) devuelve el vector de las subcadenas separadas por el caracter indicado.
+    vector<string> splitString(string input, char spliter) {
+        vector<string> output;
+        string temp = "";
+
+        for (int index = 0; index < input.size(); index++) {
+            if (input[index] == spliter) {
+                output.push_back(temp);
+                temp = "";
+            } else {
+                temp += input[index];
+            }
+        }
+
+        output.push_back(temp);
+
+        return output;
+    }
+
+    bool isNumber(string input) {
+        for (int i = 0; i < input.length(); i++) { // Aplicar reg_exp para validar todo el conjunto R
+            if (!isdigit(input[i])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool isBinaryOperator(string input) {
+        int i = 0;
+        if (input[i] == '+' || input[i] == '-') {
+            return true;
+        } else if (input[i] == '*' || input[i] == '/') {
+            return true;
+        } else if (input[i] == '^') {
+            return true;
+        }
+        
+        return false;
+    }
+};
 #endif
+
+

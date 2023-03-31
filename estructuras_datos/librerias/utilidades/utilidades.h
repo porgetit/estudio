@@ -2,39 +2,56 @@
 #define UTILIDADES_H
 
 #include <iostream>
-#include <cstring>
-#include <cctype>
-#include "pilas.h"
+#include <string>
+#include <vector>
 
 class string_tools {
 public:
-    static Stack splitPrefixExpression(char*);
+    static vector<string> splitString(string, char);
+    static bool isNumber(string);
+    static bool isBinaryOperator(string);
 };
 
-// Usar clear con la pila devuelta al terminar de usarla
-Stack string_tools::splitPrefixExpression(char* expresion) {
-    Stack cadena;
-    cadena.top = NULL;
+// splitString(string, char) devuelve el vector de las subcadenas separadas por el caracter indicado.
+vector<string> string_tools::splitString(string input, char spliter) {
+    vector<string> output;
+    string temp = "";
 
-    int len = strlen(expresion);
-    for (int index = 0; index < len; index++) {
-        if (isspace(expresion[index]) != 0) {
-
-            std::string transference_buffer = ""; // Buffer de transferencia
-            int subIndex = index;
-
-            while(isspace(expresion[subIndex]) != 0 || expresion[index] == '\0') { // Recorremos la subcadena encontrada
-                transference_buffer.append(1, expresion[subIndex]);
-            }
-
-            index = subIndex; // Saltamos a la próxima subcadena
-            
-            DataType atom = (DataType) transference_buffer.c_str();
-            push(&cadena, atom);
+    for (int index = 0; index < input.size(); index++) {
+        if (input[index] == spliter) {
+            output.push_back(temp);
+            temp = "";
+        } else {
+            temp += input[index];
         }
     }
 
-    return cadena;
+    output.push_back(temp);
+
+    return output;
+}
+
+bool string_tools::isNumber(string input) {
+    for (int i = 0; i < input.length(); i++) { // Aplicar reg_exp para validar todo el conjunto R
+        if (!isdigit(input[i])) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool string_tools::isBinaryOperator(string input) {
+    int i = 0;
+    if (input[i] == '+' || input[i] == '-') {
+        return true;
+    } else if (input[i] == '*' || input[i] == '/') {
+        return true;
+    } else if (input[i] == '^') {
+        return true;
+    }
+    
+    return false;
 }
 
 #endif
