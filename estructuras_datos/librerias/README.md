@@ -4,17 +4,17 @@
 La librería Utilities.h para C++ contiene tres clases útiles para manipular pilas dinámicas, colas dinámicas y cadenas. Estas clases son StackTools, QueueTools y StringTools, respectivamente.
 
 ## Clase StackTools
-La clase StackTools se utiliza para manipular pilas dinámicas. Permite realizar operaciones como agregar elementos a la pila, sacar elementos de la pila y obtener el tamaño actual de la pila.
+La clase StackTools se utiliza para manipular pilas dinámicas. Permite realizar operaciones como agregar elementos a la pila, sacar elementos de la pila y obtener el tamaño actual de la pila, entre otros.
 
 ### Métodos
 
-- ```void push(DataType)```
-- ```DataType pop()```
-- ```int size()```
-- ```bool empty()```
-- ```void clear()```
-- ```DataType peek()```
-- ```vector<DataType> return_stack()```
+- Empilar un elemento :arrow_right: ```void push(DataType)```
+- Desempilar la cabecera :arrow_right: ```DataType pop()```
+- Obtener la longitud de la pila :arrow_right: ```int size()```
+- Verificar si la pila está vacía :arrow_right: ```bool empty()``` 
+- Limpiar la pila :arrow_right: ```void clear()```
+- Obtener el elemento de la cabecera :arrow_right: ```DataType peek()```
+- Obtener toda la pila :arrow_right: ```vector<DataType> return_stack()```
 
 ### Implementación
 
@@ -59,14 +59,14 @@ La clase QueueTools se utiliza para manipular colas dinámicas. Permite realizar
 
 ### Métodos
 
-- ```void push(U)```
-- ```U pop()```
-- ```int size()```
-- ```bool empty()```
-- ```void clear()```
-- ```vector<U> return_queue()```
-- ```U firstIn()```
-- ```U lastIn()```
+- Encolar un elemento :arrow_right: ```void push(U)```
+- Desencolar un elemento :arrow_right: ```U pop()```
+- Obtener la longitud de la cola :arrow_right: ```int size()```
+- Verificar si la cola está vacía :arrow_right: ```bool empty()```
+- Limpiar la cola :arrow_right: ```void clear()```
+- Obtener toda la cola :arrow_right: ```vector<U> return_queue()```
+- Obtener el primer elemento de la cola :arrow_right: ```U firstIn()```
+- Obtener el último elemento de la cola :arrow_right: ```U lastIn()```
 
 ### Implementación
 
@@ -119,13 +119,12 @@ La clase StringTools se utiliza para manipular cadenas. Permite realizar operaci
 
 ### Métodos
 
-- ```void filterString(string& input, const vector<char>& allowed_chars)```
-- ```bool inVectorFindElement(char element, const vector<char>& container)```
-- ```vector<string> splitString(const string& input, char splitter)```
-- ```bool isNumber(string input)```
-- ```bool isBinaryOperator(string input)```
-- ```void toUpperCase(string& input)```
-- ```void toLowerCase(string& input)```
+- Filtrar una cadena :arrow_right: ```void filterString(string& input, const vector<char>& allowed_chars)```
+- Obtener una cadena seccionada :arrow_right: ```vector<string> splitString(const string& input, char splitter)```
+- Verifica si una cadena es un número :arrow_right: ```bool isNumber(string input)```
+- Verificar si una cadena es un operador binario :arrow_right: ```bool isBinaryOperator(string input)```
+- Convertir una cadena en mayúsculas :arrow_right: ```void toUpperCase(string& input)```
+- Convertir una cadena en minúsculas :arrow_right: ```void toLowerCase(string& input)```
 
 ### Implementación
 

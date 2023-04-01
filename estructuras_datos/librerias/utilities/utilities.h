@@ -240,15 +240,6 @@ public:
         }
     }
 
-    bool inVectorFindElement(char element, const vector<char>& container) {
-        for (int i = 0; i < container.size(); i++) {
-            if (container[i] == element) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     vector<string> splitString(const string& input, char splitter) {
         vector<string> output;
         string temp = "";
@@ -295,6 +286,15 @@ public:
     }
 
 private:
+    bool inVectorFindElement(char element, const vector<char>& container) {
+        for (int i = 0; i < container.size(); i++) {
+            if (container[i] == element) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Elimina los espacios en blanco al inicio y al final de la cadena
     void trim(string& input) {
         // Elimina los espacios en blanco al inicio
