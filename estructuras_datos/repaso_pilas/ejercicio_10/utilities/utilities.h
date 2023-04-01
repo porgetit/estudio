@@ -136,7 +136,11 @@ public:
      * @brief Este método devuelve el contenido de la cabecera de la pila.
     */
     static DataType peek(Stack* stack) {
-        return stack->top->data;
+        if (empty(stack)) {
+            throw std::runtime_error("No puede limpiar una pila vacía");
+        } else {
+            return stack->top->data;
+        }
     }
 
     /**
