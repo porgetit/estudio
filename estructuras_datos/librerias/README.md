@@ -59,14 +59,14 @@ La clase QueueTools se utiliza para manipular colas dinámicas. Permite realizar
 
 ### Métodos
 
-- Encolar un elemento :arrow_right: ```void push(U)```
-- Desencolar un elemento :arrow_right: ```U pop()```
+- Encolar un elemento :arrow_right: ```void push(DataType)```
+- Desencolar un elemento :arrow_right: ```DataType pop()```
 - Obtener la longitud de la cola :arrow_right: ```int size()```
 - Verificar si la cola está vacía :arrow_right: ```bool empty()```
 - Limpiar la cola :arrow_right: ```void clear()```
-- Obtener toda la cola :arrow_right: ```vector<U> return_queue()```
-- Obtener el primer elemento de la cola :arrow_right: ```U firstIn()```
-- Obtener el último elemento de la cola :arrow_right: ```U lastIn()```
+- Obtener toda la cola :arrow_right: ```vector<DataType> return_queue()```
+- Obtener el primer elemento de la cola :arrow_right: ```DataType firstIn()```
+- Obtener el último elemento de la cola :arrow_right: ```DataType lastIn()```
 
 ### Implementación
 
