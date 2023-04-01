@@ -2,101 +2,67 @@
 #define UTILIDADES_H
 
 #include <iostream>
-#include <cstdlib>
 #include <string>
 #include <vector>
+#include <regex>
 #include <algorithm>
 
 using namespace std;
 
+
 template<typename T>
-
-/**
- * @brief stack_tools contiene estructuras y métodos que le permiten definir una pila de cualquier tipo de dato.
- * 
- * @defgroup stack_tools
- * 
- * @section Instancia de clase:
- * Para instanciar un objeto stack_tools debe hacerlo así: 
- *      stack_tools<DataType> miPila;
- * Dónde DataType es el tipo de dato que heredará la pila y,
- * miPila es el objeto que heredará todos los métodos de la clase.
- * 
- * @section Tipos de datos recomendados para trabajar con la clase:
- * Tipos de datos numéricos: int, float, double, long, etc.
- * Tipos de datos booleanos: bool.
- * Tipos de datos de caracteres: char, std::string, etc;
- * Tipos de datos estructurados simples: struct.
-*/
-class stack_tools {
+class StackTools {
 public:
-    typedef T DataType; // Tipo de dato de la pila
 
-    /**
-     * @brief Esta estructura define la naturaleza de los nodos de una pila.
-    */
-    typedef struct Node {
-        DataType data;
+    struct Node {
+        T data;
         Node* next;
-    } Node;
+    };
 
-    /**
-     * @brief Esta estructura define una pila.
-    */
-    typedef struct Stack { 
+    struct Stack {
         Node* top;
-    } Stack;
+    };
 
-    // stack_tools() {
-    //     this->size_ = 0;
-    // }
+    Stack* stack;
 
-    static Stack init_stack() {
-        Stack stack;
-        stack.top = NULL;
-        return stack;
+    // Constructor
+    StackTools() {
+        stack = new Stack;
+        stack->top = nullptr;
     }
 
-    /**
-     * @brief Este método inserta/empila un nuevo nodo.
-     * 
-     * @param atom es el elemento que se insertará a la pila. 
-    */
-    static void push(Stack* stack, DataType atom) {
+    // Destructor
+    ~StackTools() {
+        if (!empty()) clear();
+        delete stack;
+    }
+
+    void push(T atom) {
         Node* newNode = new Node;
         newNode->data = atom;
         newNode->next = stack->top;
         stack->top = newNode;
     }
 
-    /**
-     * @brief Este método devuelve/desempila el nodo cabecera de la pila.
-     * 
-     * @throw Si la pila está vacía el método arrojará una excepción: (runtime_error) 
-    */
-    static DataType pop(Stack* stack) {
-        if (empty(stack)) {
-            throw std::runtime_error("No puede extraer elementos de una pila vacía");
+    T pop() {
+        if (empty()) {
+            throw runtime_error("No puede extraer elementos de una pila vacía");
+        } else {
+            Node* eliminatedNode = stack->top;
+            T data = eliminatedNode->data;
+            stack->top = eliminatedNode->next;
+            delete eliminatedNode;
+
+            return data;
         }
-
-        Node* eliminatedNode = stack->top;
-        DataType data = eliminatedNode->data;
-        stack->top = eliminatedNode->next;
-        delete eliminatedNode;
-
-        return data;
     }
 
-    /**
-     * @brief Este método retorna el largo de la pila.
-     * @todo Debo hacer que este método recorra la pila (stack) contando el número de nodos y retorne el número de nodos
-    */
-    static int size(Stack* stack) {
+    int size() {
         int len = 0;
         
         Node* currentNode = stack->top;
 
-        while (currentNode != NULL) {
+        while (currentNode != nullptr) {
             len++;
             currentNode = currentNode->next;
         }
@@ -104,64 +70,168 @@ public:
         return len;
     }
 
-    /**
-     * @brief Este método verifica si la pila está vacía.
-     * 
-     * @todo Cambiar por verificación por tamaño, para evitar problemas de operadores
-    */
-    static bool empty(Stack* stack) {
-        if (size(stack) != 0) {
+    bool empty() {
+        if (size() != 0) {
             return false;
         }
 
         return true;
     }
 
-    /**
-     * @brief Este método vacía/límpia por completo al pila.
-     * 
-     * @throw Si la pila está vacía el método arrojará una excepción: (runtime_error)
-    */
-    static void clear(Stack* stack) {
-        if (empty(stack)) {
-            throw std::runtime_error("No puede limpiar una pila vacía");
-        }
-
-        while (!empty(stack)) {
-            pop(stack);
+    void clear() {
+        if (empty()) {
+            throw runtime_error("No puede limpiar una pila vacía");
+        } else {
+            while (!empty()) {
+                pop();
+            }
         }
     }
 
-    /**
-     * @brief Este método devuelve el contenido de la cabecera de la pila.
-    */
-    static DataType peek(Stack* stack) {
+    T peek() {
         return stack->top->data;
     }
 
-    /**
-     * @brief Este método imprime la pila completa sin modificarla.
-     * @todo Agregar soporte de rangos
-    */
-    static vector<DataType> return_stack(Stack* stack) { 
-        vector<DataType> content;
+    vector<T> return_stack() { 
+        vector<T> content;
 
         Node* currentNode = stack->top;
 
-        while (currentNode != NULL) {
+        while (currentNode != nullptr) {
             content.push_back(currentNode->data);
             currentNode = currentNode->next;
         }
 
         return content;
-   }
+    }
 };
 
-class string_tools {
+
+template<typename U>
+class QueueTools {
+public:
+    struct Node {
+        U data;
+        Node* next;
+    };
+
+    struct Queue {
+        Node* front;
+        Node* back;
+    };
+
+    Queue* queue;
+
+    // Constructor
+    QueueTools() {
+        queue = new Queue;
+        queue->front = nullptr;
+        queue->back = nullptr;
+    }
+
+    // Destructor
+    ~QueueTools() {
+        if (!empty()) clear();
+        delete queue;
+    }
+
+    void push(U data) {
+        Node* newNode = new Node;
+        newNode->data = data;
+        newNode->next = NULL;
+
+        if (empty()) {
+            queue->front = newNode;
+            queue->back = newNode;
+        } else {
+            queue->back->next = newNode;
+            queue->back = newNode;
+        }
+    }
+
+    U pop() {
+        if (empty()) {
+            throw runtime_error("No se puede extraer de una cola vacía.");
+        } else {
+            Node* currentNode = queue->front;
+            U data = currentNode->data;
+
+            if (queue->front == queue->back) { // La cola tiene un solo elemento
+                queue->front = NULL;
+                queue->back = NULL;
+            } else {
+                queue->front = currentNode->next;
+            }
+
+            delete currentNode;
+
+            return data;
+        }        
+    }
+
+    int size() {
+        int count = 0;
+        if (empty()) return count;
+        else {
+            Node* currentNode = queue->front;
+        
+            while (currentNode != NULL) {
+                count++;
+                currentNode = currentNode->next;
+            }
+
+            return count;
+        }
+    }
+
+    bool empty() {
+        if (queue->back == NULL) {
+            return true;
+        }
+
+        return false;
+    }
+
+    void clear() {
+        if (empty()) {
+            throw runtime_error("No puede limpiar una cola vacía");
+        } else {
+            while(!empty()) {
+                pop();
+            }
+        }
+    }
+
+    vector<U> return_queue() { 
+        vector<U> content;
+
+        Node* currentNode = queue->front;
+
+        while (currentNode != nullptr) {
+            content.push_back(currentNode->data);
+            currentNode = currentNode->next;
+        }
+
+        return content;
+    }
+
+    U firstIn() {
+        U data = queue->front->data;
+        return data;
+    }
+    
+    U lastIn() {
+        U data = queue->back->data;
+        return data;
+    }
+};
+
+
+class StringTools {
 public:
 
-    void filterString(string& input, vector<char> allowed_chars) {
-        for (int index = 0; index < input.size(); index++) {
+    void filterString(string& input, const vector<char>& allowed_chars) {
+        for (int index = input.size() - 1; index >= 0; index--) {
             char element = input[index];
             
             if (!inVectorFindElement(element, allowed_chars)) {
@@ -170,57 +240,81 @@ public:
         }
     }
 
-    bool inVectorFindElement(char elemento, vector<char>& container) {
+    bool inVectorFindElement(char element, const vector<char>& container) {
         for (int i = 0; i < container.size(); i++) {
-            if (container[i] == elemento) {
+            if (container[i] == element) {
                 return true;
             }
         }
         return false;
     }
 
-    // splitString(string, char) devuelve el vector de las subcadenas separadas por el caracter indicado.
-    vector<string> splitString(string input, char spliter) {
+    vector<string> splitString(const string& input, char splitter) {
         vector<string> output;
         string temp = "";
 
         for (int index = 0; index < input.size(); index++) {
-            if (input[index] == spliter) {
-                output.push_back(temp);
-                temp = "";
+            if (input[index] == splitter) {
+                if (!temp.empty()) {
+                    output.push_back(temp);
+                    temp = "";
+                }
             } else {
                 temp += input[index];
             }
         }
 
-        output.push_back(temp);
+        if (!temp.empty()) {
+            output.push_back(temp);
+        }
 
         return output;
     }
 
+    /*
+    La función "isNumber" solo verifica si la cadena es un número con un punto decimal opcional. Esto significa que no detectará números en notación científica o números con comas en lugar de puntos decimales. Si se desea una función más robusta para verificar si una cadena es un número, se puede considerar usar la biblioteca Boost para expresiones regulares o usar una biblioteca de análisis numérico.
+    */
     bool isNumber(string input) {
-        for (int i = 0; i < input.length(); i++) { // Aplicar reg_exp para validar todo el conjunto R
-            if (!isdigit(input[i])) {
-                return false;
-            }
-        }
-
-        return true;
+        regex number_regex("^[+-]?[0-9]+([.][0-9]+)?$");
+        return regex_match(input, number_regex);
     }
 
     bool isBinaryOperator(string input) {
-        int i = 0;
-        if (input[i] == '+' || input[i] == '-') {
-            return true;
-        } else if (input[i] == '*' || input[i] == '/') {
-            return true;
-        } else if (input[i] == '^') {
-            return true;
+        vector<string> binary_operators = {"+", "-", "*", "/", "^", "==", "!=", "<", ">", "<=", ">=", "&&", "||"};
+        return find(binary_operators.begin(), binary_operators.end(), input) != binary_operators.end();
+    }
+
+    // Convierte la cadena a mayúsculas
+    void toUpperCase(string& input) {
+        transform(input.begin(), input.end(), input.begin(), ::toupper);
+    }
+
+    // Convierte la cadena a minúsculas
+    void toLowerCase(string& input) {
+        transform(input.begin(), input.end(), input.begin(), ::tolower);
+    }
+
+private:
+    // Elimina los espacios en blanco al inicio y al final de la cadena
+    void trim(string& input) {
+        // Elimina los espacios en blanco al inicio
+        input.erase(input.begin(), find_if(input.begin(), input.end(), [](int ch) {
+            return !isspace(ch);
+        }));
+
+        // Elimina los espacios en blanco al final
+        input.erase(find_if(input.rbegin(), input.rend(), [](int ch) {
+            return !isspace(ch);
+        }).base(), input.end());
+    }
+
+     // Reemplaza todas las ocurrencias de una subcadena por otra en la cadena de entrada
+    void replaceAll(string& input, const string& search, const string& replace) {
+        size_t pos = 0;
+        while ((pos = input.find(search, pos)) != string::npos) {
+            input.replace(pos, search.length(), replace);
+            pos += replace.length();
         }
-        
-        return false;
     }
 };
 #endif
-
-
