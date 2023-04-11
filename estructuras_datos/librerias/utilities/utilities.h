@@ -6,6 +6,7 @@
 #include <vector>
 #include <regex>
 #include <algorithm>
+#include <random>
 
 using namespace std;
 
@@ -316,5 +317,67 @@ private:
             pos += replace.length();
         }
     }
+};
+
+
+class RandomTools {
+public:
+    RandomTools() : engine_(rd_()) {}
+
+    int randomInt(int cota_a, int cota_b = 0) {
+        std::uniform_int_distribution<int> dist(cota_a, cota_b);
+        return dist(engine_);
+    }
+
+    std::vector<int> randomIntVector(int len, int cota_a, int cota_b = 0) {
+        std::vector<int> vec;
+
+        for (int i = 0; i < len; i++) {
+            vec.push_back(randomInt(cota_a, cota_b));
+        }
+
+        return vec;
+    }
+
+    float randomFloat(float cota_a, float cota_b) {
+        std::uniform_real_distribution<float> dist(cota_a, cota_b);
+        return dist(engine_);
+    }
+
+    std::vector<float> randomFloatVector(int len, float cota_a, float cota_b) {
+        std::vector<float> vec;
+
+        for (int i = 0; i < len; i++) {
+            vec.push_back(randomFloat(cota_a, cota_b));
+        }
+
+        return vec;
+    }
+
+    char randomChar() {
+        std::uniform_int_distribution<int> dist(97, 122);
+        char atom = (char) (dist(engine_));
+        return atom;
+    }
+
+    std::string randomString(int len) {
+        std::string data = "";
+
+        for (int i = 0; i < len; i++) {
+            data.push_back(randomChar());
+        }
+
+        return data;
+    }
+
+    bool randomBool() {
+        std::uniform_int_distribution<int> dist(0, 1);
+        bool truth = dist(engine_) == 1 ? true : false;
+        return truth;
+    }
+
+private:
+    std::random_device rd_;
+    std::mt19937 engine_;
 };
 #endif

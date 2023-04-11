@@ -174,3 +174,53 @@ int main() {
     return 0;
 }
 ```
+## Clase RandomTools
+La clase RandomTools proporciona herramientas para generar números aleatorios en diferentes rangos y formatos. Permite obtener enteros y vectores de enteros aleatorios, así como números de punto flotante y vectores de punto flotante. Además, es capaz de generar caracteres aleatorios y cadenas de caracteres de longitud arbitraria. También ofrece la posibilidad de generar valores booleanos aleatorios.
+
+### Métodos
+
+- Obtener un número entero aleatorio dentro de una rango :arrow_right: ```int randomInt(int cota_a, int cota_b)```
+- Obtener un ventor de número enteros aleatorios dentro de una rango :arrow_right: ```vector<int> randomIntVector(int len, int cota_a, int cota_b)```
+- Obtener un número con coma flotante aleatorio dentro de un rango :arrow_right: ```float randomFloat(float cota_a, float cota_b)```
+- Obtener un vector de números con coma flotante aleatorios dentro de una rango :arrow_right: ```vector<float> randomFloatVector(int len, float cota_a, float cota_b)```
+- Obtener una letra minúscula aleatoria :arrow_right: ```char randomChar()```
+- Obtener una cadena de letras minúsculas aleatorias de longitud especificada :arrow_right: ```string randomString(int len)```
+- Obtener un valor booleano aleatorio :arrow_right: ```bool randomBool()```
+
+### Implementación
+```cpp
+#include <iostream>
+#include "utilities.h"
+
+using namespace std;
+
+int main() {
+    RandomTools randomTools;
+
+    cout << "Número aleatorio entre 1 y 10: " << randomTools.randomInt(1, 10) << endl;
+
+    vector<int> vec = randomTools.randomIntVector(5, 1, 10);
+    cout << "Vector de enteros aleatorios: ";
+    for (auto i: vec) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    cout << "Número aleatorio entre 1.0 y 2.0: " << randomTools.randomFloat(1.0, 2.0) << endl;
+
+    vector<float> vec2 = randomTools.randomFloatVector(5, 1.0, 2.0);
+    cout << "Vector de flotantes aleatorios: ";
+    for (auto i: vec2) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    cout << "Carácter aleatorio: " << randomTools.randomChar() << endl;
+
+    cout << "Cadena aleatoria de longitud 5: " << randomTools.randomString(5) << endl;
+
+    cout << "Booleano aleatorio: " << randomTools.randomBool() << endl;
+
+    return 0;
+}
+```
