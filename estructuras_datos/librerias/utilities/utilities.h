@@ -227,6 +227,145 @@ public:
     }
 };
 
+template<typename V>
+class ListTools {
+public:
+
+    struct Node {
+        V data;
+        Node* next;
+    };
+
+    struct List {
+        Node* head;
+    };
+
+    List* list;
+
+    // Constructor de clase
+    ListTools() {
+        list = new List;
+        list->head = nullptr;
+    }
+
+    // Destructor de clase
+    ~ListTools() {
+        if (!empty()) clear();
+        delete list;
+    }
+
+    void append(V data) {
+        Node* newNode = new Node;
+        newNode->data = data;
+        newNode->next = nullptr;
+
+        if (empty()) {
+            list->head = newNode;
+        } else {
+            Node* currentNode = list->head;
+            while (currentNode->next != nullptr) {
+                currentNode = currentNode->next;
+            }
+            currentNode->next = newNode;
+        }
+    }
+
+    void insert(int index, V data) {
+        if (index < 0 || index > size()) {
+            throw out_of_range("Índice fuera de rango");
+        }
+
+        Node* newNode = new Node;
+        newNode->data = data;
+
+        if (index == 0) {
+            newNode->next = list->head;
+            list->head = newNode;
+        } else {
+            Node* prevNode = nullptr;
+            Node* currentNode = list->head;
+
+            for (int i = 0; i < index; i++) {
+                prevNode = currentNode;
+                currentNode = currentNode->next;
+            }
+
+            prevNode->next = newNode;
+            newNode->next = currentNode;
+        }
+    }
+
+    V pop(int index = -1) {
+        if (empty()) {
+            throw runtime_error("No puede extraer elementos de una lista vacía");
+        } else if (index < -1 || index >= size()) {
+            throw out_of_range("Índice fuera de rango");
+        } else {
+            Node* eliminatedNode = nullptr;
+            V data;
+
+            if (index == -1) {
+                // Extraer el último elemento
+                Node* prevNode = nullptr;
+                Node* currentNode = list->head;
+
+                while (currentNode->next != nullptr) {
+                    prevNode = currentNode;
+                    currentNode = currentNode->next;
+                }
+                eliminatedNode = currentNode;
+                data = eliminatedNode->data;
+                
+                if (prevNode != nullptr) {
+                    prevNode->next = nullptr;
+                } else {
+                    list->head = nullptr;
+                }
+            } else if (index == 0) {
+                // Extraer el primer elemento
+                eliminatedNode = list->head;
+                data = eliminatedNode->data;
+                list->head = eliminatedNode->next;
+            } else {
+                // Extraer un elemento intermedio
+                Node* prevNode = nullptr;
+                Node* currentNode = list->head;
+                for (int i = 0; i < index; i++) {
+                    prevNode = currentNode;
+                    currentNode = currentNode->next;
+                }
+                eliminatedNode = currentNode;
+                data = eliminatedNode->data;
+                prevNode->next = eliminatedNode->next
+            }
+
+            delete eliminatedNode;
+            return data;
+        }
+    }
+
+    void remove(V data) {
+        Node* prevNode = nullptr;
+        Node* currentNode = list->head;
+
+        while (currentNode != nullptr) {
+            if (currentNode->data == data) {
+                if (prevNode == nullptr) {
+                    pop(0);
+                } else if (currentNode->next == nullptr) {
+                    pop();
+                } else {
+                    prevNode->next = currentNode->next;
+                    delete currentNode;
+                }
+                return;
+            }
+            prevNode = currentNode;
+            currentNode = currentNode->next;
+        }
+        throw runtime_error("Elemento no encontrado");
+    }
+};
 
 class StringTools {
 public:
