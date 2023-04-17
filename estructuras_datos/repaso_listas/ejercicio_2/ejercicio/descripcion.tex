@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\title{Método de Simpson $\frac{1}{3}$}
+\author{Kevin Esguerra Cardona}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Descripción del problema}
+En matemáticas, concretamente en el cálculo integral, existen máquinas abstractas que nos ayudan a calcular sumatorias finitas o innumerables términos, llamadas integrales. Estas son aplicadas sobre funciones y obtenemos antiderivadas. Al determinar un intervalo sobre el cual se va a integrar se puede definir un valor presiso que describe la relación entre el área contenido en la región definida. Sin embargo, existen algunas de estas operaciones que resultan imposibles de calcular por métodos tradicionales. Para ello existen los métodos de integración numéricos. Uno de ellos, el que trabajaremos el día de hoy, es el método de Simpson $\frac{1}{3}$. 
+
+Se busca implementar dicho método dentro de un programa que calcule específicamente la de integral definida en un rango dado de la curva $y = e^{-x^{2}}$. Su tarea consistirá en deducir e implementar un algoritmo adecuado para este problema a partir del siguiente desarrollo matemático, dónde $N_{i}$ es el número de particiones de la curva y $h$ es el ancho de cada una de esas particiones. 
+
+\begin{equation}
+    \int_{1}^{3} e^{-x^{2}} dx; 
+\end{equation}
+
+\begin{equation}
+    N_{i} = 6;
+\end{equation}
+
+\begin{equation}
+    h = \frac{3 - 1}{N_{i}} = \frac{1}{3}
+\end{equation}
+
+\begin{equation}
+    X_{0} = 1 \rightarrow f(X_{0}) \approx 0.36787
+\end{equation}
+
+\begin{equation}
+    X_{1} = X_{0} + h = \frac{4}{3} \rightarrow f(X_{1}) \approx 0.16901
+\end{equation}
+
+\begin{equation}
+    X_{2} = X_{1} + h = \frac{5}{3} \rightarrow f(X_{2}) \approx 0.06217
+\end{equation}
+
+\begin{equation}
+    X_{3} = X_{2} + h = \frac{6}{3} \rightarrow f(X_{3}) \approx 0.01831
+\end{equation}
+
+\begin{equation}
+    X_{4} = X_{3} + h = \frac{7}{3} \rightarrow f(X_{4}) \approx 0.00432
+\end{equation}
+
+\begin{equation}
+    X_{5} = X_{4} + h = \frac{8}{3} \rightarrow f(X_{5}) \approx 0.00081
+\end{equation}
+
+\begin{equation}
+    X_{6} = X_{5} + h = \frac{9}{3} \rightarrow f(X_{6}) \approx 0.00012
+\end{equation}
+
+\begin{equation}
+    \int_{1}^{3} e^{-x^{2}} dx \approx (\frac{h}{3}) [f(X_{0}) + 4f(X_{1}) + 2f(X_{2}) + 4f(X_{3}) + 2f(X_{4}) + 4f(X_{5}) + f(X_{6})]
+\end{equation}
+
+\begin{equation}
+    \int_{1}^{3} e^{-x^{2}} dx \approx \frac{1}{6} [0.16901 + 0.06217 + 0.01831 + 0.00432 + 0.00081 + 0.00012]
+\end{equation}
+
+\begin{equation}
+    \int_{1}^{3} e^{-x^{2}} dx \approx 0.208915
+\end{equation}
+
+\section*{Aclaraciones adicionales}
+\begin{itemize}
+    \item Notar que el patrón de coeficientes de la serie de sumas $1y + 4y + 2y + 4y + 2y + 4y + 1y$ para 6 intervalos se puede extender a $1y + \dots +  4y + 2y + 4y + 2y + \dots + 2y + 4y + 1y$. Es decir, el primer coeficiente siempre será 1, los últimos tres coeficientes serán 2 , 4 y 1, respectivamente; y, los coeficientes intermedio se corresponderán al patron oscilante 2$\leftrightarrow$4.
+    \item Aclarar que la cantidad de intervalos siempre debe ser par.
+    \item El valor real de la integral es 0.13938
+\end{itemize}
+
+\section*{Condiciones}
+\begin{enumerate}
+    \item Debe utilizar una implementación personal de la estructura de datos \\dinámica necesaria para almacenar los resultados.
+    \item Debe procurar buenas prácticas de programación. Consulte el siguiente artículo para más detalles: \\ https://keepcoding.io/blog/8-buenas-practicas-en-programacion/
+    \item Debe procurar la menor complejidad computacional que le sea posible. Evalúe con el método Big-O.
+    \item Acercar al valor real de la integral con un error menor a $1\%$.
+\end{enumerate}
+
+\section*{Entregables}
+\begin{enumerate}
+    \item Algoritmo implementado en pseudo-código.
+    \item Algoritmo implementado en C++.
+\end{enumerate}
+
+\end{document}

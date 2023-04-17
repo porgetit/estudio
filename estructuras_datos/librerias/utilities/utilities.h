@@ -227,6 +227,14 @@ public:
     }
 };
 
+template<typename P>
+class ListTools {
+public:
+    struct Node {
+        
+    }
+}
+
 
 class StringTools {
 public:
