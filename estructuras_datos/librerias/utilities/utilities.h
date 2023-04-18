@@ -366,7 +366,143 @@ public:
         }
         throw runtime_error("Elemento no encontrado");
     }
+
+    bool empty() {
+        return list->head == nullptr;
+    }
+
+    void clear() {
+        if (empty()) throw runtime_error("No se puede limpiar un lista vacía");
+        else {
+            while (!empty()) {
+                pop();
+            }
+        }
+    }
+
+    void extend(List* newData) {
+        Node* currentExtendedNode = newData->head;
+        while(currentExtendedNode != nullptr) {
+            V data = currentExtendedNode->data;
+            append(data);
+            currentExtendedNode = currentExtendedNode->next;
+        }
+    }
+
+    int index(V value) {
+        int i = 0;
+        bool wit = false;
+        Node* currentNode = list->head;
+
+        while (currentNode != nullptr && wit == false) {
+            i++;
+            if (currentNode->data == value) {
+                wit = true;
+            } else {
+                currentNode = currentNode->next;
+            }
+        }
+
+        if (!wit) {
+            throw runtime_error("Elemento no encontrado");
+        } else {
+            return i;
+        }
+    }
+
+    int count(V value) {
+        int times = 0;
+        Node* currentNode = list->head;
+
+        while (currentNode != nullptr) {
+            times = currentNode->data == value ? times +1: times;
+            currentNode = currentNode->next;
+        }
+
+        return times;
+    }
+
+    void reverse() {
+        StackTools<V> reversedList;
+        Node* currentNode = list->head;
+
+        while (!empty()) {
+            reversedList.push(pop(0));
+        }
+
+        while (!reversedList.empty()) {
+            append(pop());
+        }
+    }
+
+    void quickSort(char order) {
+        if (order != '>' && order != '<') {
+            throw std::invalid_argument("El parámetro de ordenamiento debe ser '<' o '>'");
+        }
+        if (list->head != nullptr) {
+            Node* lastNode = list->head;
+            while (lastNode->next != nullptr) {
+                lastNode = lastNode->next;
+            }
+            quickSortList(list->head, lastNode, order);
+        }
+    }
+
+    int size() {
+        int amount = 0;
+        Node* currentNode = list->head;
+
+        while (currentNode != nullptr) {
+            amount++;
+            currentNode = currentNode->next;
+        }
+
+        return amount;
+    }
+
+private:
+
+    void swapData(Node* a, Node* b) {
+        V temp = a->data;
+        a->data = b->data;
+        b->data = temp;
+    }
+
+    Node* partition(Node* low, Node* high, char order) {
+        V pivot = high->data;
+        Node* i = low->prev;
+        for (Node* j = low; j != high; j = j->next) {
+            if ((order == '<' && j->data <= pivot) || (order == '>' && j->data >= pivot)) {
+                i = (i == nullptr) ? low : i->next;
+                swapData(i, j);
+            }
+        }
+        i = (i == nullptr) ? low : i->next;
+        swapData(i, high);
+        return i;
+    }
+
+    void quickSortList(Node* low, Node* high, char order) {
+        if (high != nullptr && low != high && low != high->next) {
+            Node* pivot = partition(low, high, order);
+            quickSortList(low, pivot->prev, order);
+            quickSortList(pivot->next, high, order);
+        }
+    }
+
+    vector<V> completeList() {
+        vector<V> content;
+        Node* currentNode = list->head;
+
+        while (currentNode != nullptr) {
+            content.push_back(currentNode->data);
+            currentNode = currentNode->next;
+        }
+
+        return content;
+    }
 };
+
 
 class StringTools {
 public:
