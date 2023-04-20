@@ -337,7 +337,7 @@ public:
                 }
                 eliminatedNode = currentNode;
                 data = eliminatedNode->data;
-                prevNode->next = eliminatedNode->next
+                prevNode->next = eliminatedNode->next;
             }
 
             delete eliminatedNode;
@@ -435,19 +435,6 @@ public:
         }
     }
 
-    void quickSort(char order) {
-        if (order != '>' && order != '<') {
-            throw std::invalid_argument("El parámetro de ordenamiento debe ser '<' o '>'");
-        }
-        if (list->head != nullptr) {
-            Node* lastNode = list->head;
-            while (lastNode->next != nullptr) {
-                lastNode = lastNode->next;
-            }
-            quickSortList(list->head, lastNode, order);
-        }
-    }
-
     int size() {
         int amount = 0;
         Node* currentNode = list->head;
@@ -460,36 +447,6 @@ public:
         return amount;
     }
 
-private:
-
-    void swapData(Node* a, Node* b) {
-        V temp = a->data;
-        a->data = b->data;
-        b->data = temp;
-    }
-
-    Node* partition(Node* low, Node* high, char order) {
-        V pivot = high->data;
-        Node* i = low->prev;
-        for (Node* j = low; j != high; j = j->next) {
-            if ((order == '<' && j->data <= pivot) || (order == '>' && j->data >= pivot)) {
-                i = (i == nullptr) ? low : i->next;
-                swapData(i, j);
-            }
-        }
-        i = (i == nullptr) ? low : i->next;
-        swapData(i, high);
-        return i;
-    }
-
-    void quickSortList(Node* low, Node* high, char order) {
-        if (high != nullptr && low != high && low != high->next) {
-            Node* pivot = partition(low, high, order);
-            quickSortList(low, pivot->prev, order);
-            quickSortList(pivot->next, high, order);
-        }
-    }
-
     vector<V> completeList() {
         vector<V> content;
         Node* currentNode = list->head;
@@ -500,6 +457,44 @@ private:
         }
 
         return content;
+    }
+
+    void bubbleSort(char order) {
+        if (empty() || list->head->next == nullptr) return;
+
+        bool swapped;
+        Node *ptr1 = list->head, *lptr = nullptr;
+        int n = size();
+
+        do {
+            swapped = false;
+            ptr1 = list->head;
+
+            for (int i = 0; i < n - 1; i++) {
+                Node *ptr2 = ptr1->next;
+
+                if (order == '<' ? ptr1->data > ptr2->data : ptr1->data < ptr2->data) {
+                    // intercambio de nodos
+                    if (ptr1 == list->head) {
+                        list->head = ptr2;
+                    } else {
+                        lptr->next = ptr2;
+                    }
+
+                    ptr1->next = ptr2->next;
+                    ptr2->next = ptr1;
+
+                    // actualizar punteros
+                    lptr = ptr2;
+                    ptr2 = ptr1->next;
+                    swapped = true;
+                } else {
+                    lptr = ptr1;
+                    ptr1 = ptr2;
+                }
+            }
+            n--;
+        } while (swapped);
     }
 };
 
