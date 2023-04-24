@@ -498,6 +498,7 @@ public:
     }
 };
 
+
 template<typename P>
 class TreeTools {
 public:
@@ -670,6 +671,56 @@ public:
         return result;
     }
 
+    vector<vector<P>> amplitudeTraversal(Node* node = nullptr) {
+        if (node == nullptr) {
+            node = tree->root;
+        }
+
+        vector<vector<P>> result;
+
+        if (empty()) {
+            return result;
+        }
+
+        QueueTools<Node*> q;
+        q.push(node);
+
+        while (!q.empty()) {
+            int size = q.size();
+            vector<P> level;
+            for (int i = 0; i < size; i++) {
+                Node* current = q.firstIn();
+                q.pop();
+                level.push_back(current->data);
+                if (current->left != nullptr) {
+                    q.push(current->left);
+                }
+                if (current->right != nullptr) {
+                    q.push(current->right);
+                }
+            }
+            result.push_back(level);
+        }
+
+        return result;
+    }
+
+    P leastOf() {
+        if (empty()) {
+            throw runtime_error("El árbol está vacío");
+        }
+
+        return leastOf(tree->root)->data;
+    }
+
+    P greatestOf() {
+        if (empty()) {
+            throw runtime_error("El árbol está vacío");
+        }
+
+        return greatestOf(tree->root)->data;
+    }
+
 private:
     void preorderTraversal(Node* node, vector<P>& result) {
         if (node == nullptr) {
@@ -710,7 +761,24 @@ private:
         int value = pow(2, h) -1;
         return value;
     }
+
+    Node* leastOf(Node* node) {
+        if (node->left == nullptr) {
+            return node;
+        }
+
+        return leastOf(node->left);
+    }
+
+    Node* greatestOf(Node* node) {
+        if (node->right == nullptr) {
+            return node;
+        }
+
+        return greatestOf(node->right);
+    }
 };
+
 
 class StringTools {
 public:
