@@ -1,59 +1,81 @@
 #include <iostream>
 #include "../../utilities.h"
 
+using namespace std;
+
 int main() {
-    TreeTools<int> myTree;
+    TreeTools<int> miArbol;
 
-    myTree.insert(10);
-    myTree.insert(5);
-    myTree.insert(15);
-    myTree.insert(3);
-    myTree.insert(7);
-    myTree.insert(13);
-    myTree.insert(17);
+    miArbol.insert(10); // Inserción de nodos en el árbol
+    miArbol.insert(5);
+    miArbol.insert(15);
+    miArbol.insert(3);
+    miArbol.insert(7);
+    miArbol.insert(13);
+    miArbol.insert(17);
 
-    std::cout << "Inorder traversal: ";
-    for (auto i : myTree.inorderTraversal()) {
-        std::cout << i << " ";
+    /*
+    Las inserciones realizadas anteriormente son hechas de forma manual. Si se busca ingresar datos aleatorios se tendría que modificar el documento así:
+        - Establecer la raíz para generar los números aleatorios.
+        - En cada inserción, cambiar el argumento por una llamada a la función rand(). Acotada en el rango deseado. 
+    Por razones de comodidad y legivilidad del código dicho procedimiento no es realizado en esta solución, pero se deja constancia de las modificaciones
+    necesarias para su implementación.
+    */
+
+    cout << "Recorrido en orden: ";
+    for (auto i : miArbol.inorderTraversal()) {
+        cout << i << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
 
-    std::cout << "Preorder traversal: ";
-    for (auto i : myTree.preorderTraversal()) {
-        std::cout << i << " ";
+    cout << "Recorrido en preorden: ";
+    for (auto i : miArbol.preorderTraversal()) {
+        cout << i << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
 
-    std::cout << "Postorder traversal: ";
-    for (auto i : myTree.postorderTraversal()) {
-        std::cout << i << " ";
+    cout << "Recorrido en postorden: ";
+    for (auto i : miArbol.postorderTraversal()) {
+        cout << i << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
 
-    std::cout << "Tree size: " << myTree.size() << std::endl;
-    std::cout << "Tree height: " << myTree.height() << std::endl;
-
-    int popped = 5;
-    myTree.pop(popped);
-    std::cout << "Popped node value: " << popped << std::endl;
-
-    std::cout << "Inorder traversal after popping node: ";
-    for (auto i : myTree.inorderTraversal()) {
-        std::cout << i << " ";
+    cout << "Recorrido en amplitud: ";
+    for (auto i : miArbol.amplitudeTraversal()) {
+        for (auto j : i) {
+            cout << j << " ";
+        }
     }
-    std::cout << std::endl;
+    cout << endl;
 
-    if (myTree.find(15)) {
-        std::cout << "15 found in tree" << std::endl;
+    cout << "El menor elemento del árbol: " << miArbol.leastOf() << endl;
+    cout << "El mayor elemento del árbol: " << miArbol.greatestOf() << endl;
+
+    cout << "Tamaño del árbol: " << miArbol.size() << endl;
+    cout << "Altura del árbol: " << miArbol.height() << endl;
+
+    int eliminado = 5;
+    miArbol.pop(eliminado); // Eliminar un elemento del árbol
+    cout << "Valor del nodo eliminado: " << eliminado << endl;
+
+    cout << "Recorrido en orden después de eliminar el nodo: ";
+    for (auto i : miArbol.inorderTraversal()) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    if (miArbol.find(15)) { // Buscar un elemento en el árbol
+        cout << "15 encontrado en el árbol" << endl;
     } else {
-        std::cout << "15 not found in tree" << std::endl;
+        cout << "15 no encontrado en el árbol" << endl;
     }
 
-    if (myTree.find(20)) {
-        std::cout << "20 found in tree" << std::endl;
+    if (miArbol.find(20)) {
+        cout << "20 encontrado en el árbol" << endl;
     } else {
-        std::cout << "20 not found in tree" << std::endl;
+        cout << "20 no encontrado en el árbol" << endl;
     }
 
     return 0;
+
 }

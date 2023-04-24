@@ -7,11 +7,12 @@
 using namespace std;
 
 int main() {
-    srand(time(nullptr));
+    srand(time(nullptr)); // Establecemos la raiz para números aleatorios
     int option;
 
-    ListTools<int> myList;
+    ListTools<int> myList; // Inicializamos una nueva lista
 
+    // Mostrar menú
     while (option != 6) {
         cout << "\t   LISTAS SIMPLEMENTE ENLAZADAS" << endl;
         cout << "\t-------------- Menú --------------" << endl;
@@ -27,17 +28,17 @@ int main() {
         switch (option)
         {
         case 1:
-            myList.insert(0, (rand() % MAX));
+            myList.insert(0, (rand() % MAX)); // Ingresar el dato al inicio
             break;
         case 2:
-            myList.append((rand() % MAX));
+            myList.append((rand() % MAX)); // Ingresar el dato al final
             break;
         case 3:
-            myList.append((rand() % MAX));
-            myList.bubbleSort('<');
+            myList.append((rand() % MAX)); // Ingresar el dato al final
+            myList.bubbleSort('<'); // Reordenar la lista
             break;
         case 4:
-            for (auto i : myList.completeList()) {
+            for (auto i : myList.completeList()) { // Mostrar la lista
                 cout << i << " ";
             }
             cout << endl;
@@ -50,7 +51,7 @@ int main() {
             break;
         case 5:
             cout << "Lista: ";
-            for (auto i : myList.completeList()) {
+            for (auto i : myList.completeList()) { // Mostrar la lista
                 cout << i << " ";
             }
             cout << endl;
