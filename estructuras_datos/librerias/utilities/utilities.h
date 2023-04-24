@@ -27,14 +27,37 @@ public:
     Stack* stack;
 
     // Constructor
-    StackTools() {
+    StackTools(string filename = "") {
         stack = new Stack;
         stack->top = nullptr;
+
+        if (filename != "") {
+            // Indicar el manejo de archivos internamente
+            is_binary = true;
+
+            // Verificar la extensión del archivo
+            if (filename.substr(filename.find_last_of(".") +1) != "bin") {
+                throw runtime_error("La extensión el archivo debe ser \".bin\"");
+            }
+
+            vector<T> content = read_from_file(filename);
+
+            for (auto i = content.rbegin(); i != content.rend(); i++) {
+                push(*i);
+            }
+        }
     }
 
     // Destructor
     ~StackTools() {
-        if (!empty()) clear();
+        if (!empty()) {
+            if (is_binary) {
+                write_to_file("temp.bin");
+                rename("temp.bin", "data.bin");
+            }
+
+            clear();
+        }
         delete stack;
     }
 
@@ -102,6 +125,58 @@ public:
             content.push_back(currentNode->data);
             currentNode = currentNode->next;
         }
+
+        return content;
+    }
+
+private:
+    bool is_binary = false;
+
+    void write_to_file(string filename) {
+        ofstream outfile(filename, ios::out | ios::binary);
+
+        if (!outfile) {
+            cerr << "Error al abrir el archivo " << filename << " para escritura binaria." << endl;
+            return;
+        }
+
+        // Escribir la cantidad de elementos de la pila en el archivo
+        int n = size();
+        outfile.write(reinterpret_cast<char*>(&n), sizeof(n));
+
+        // Escribir cada elemento de la pila en el archivo
+        Node* currentNode = stack->top;
+        while (currentNode != nullptr) {
+            T data = currentNode->data;
+            outfile.write(reinterpret_cast<char*>(&data), sizeof(T));
+            currentNode = currentNode->next;
+        }
+
+        outfile.close();
+    }
+
+    vector<T> read_from_file(string filename) {
+        vector<T> content;
+
+        ifstream infile(filename, ios::in | ios::binary);
+
+        if (!infile) {
+            cerr << "Error al abrir el archivo " << filename << " para lectura binaria." << endl;
+            return content;
+        }
+
+        // Leer la cantidad de elementos de la pila del archivo
+        int n;
+        infile.read(reinterpret_cast<char*>(&n), sizeof(n));
+
+        // Leer cada elemento de la pila del archivo y agregarlo al vector
+        for (int i = 0; i < n; i++) {
+            T data;
+            infile.read(reinterpret_cast<char*>(&data), sizeof(T));
+            content.push_back(data);
+        }
+
+        infile.close();
 
         return content;
     }
@@ -711,6 +786,7 @@ private:
         return value;
     }
 };
+
 
 class StringTools {
 public:
