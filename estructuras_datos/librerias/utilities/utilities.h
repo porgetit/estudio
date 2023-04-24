@@ -498,6 +498,219 @@ public:
     }
 };
 
+template<typename P>
+class TreeTools {
+public:
+    struct Node {
+        P data;
+        Node* left;
+        Node* right;
+    };
+
+    struct Tree {
+        Node* root;
+    };
+
+    Tree* tree;
+
+    // Constructor de clase
+    TreeTools() {
+        tree = new Tree;
+        tree->root = nullptr;
+    }
+
+    // Destructor de clase
+    ~TreeTools() {
+        clear();
+        delete tree;
+    }
+
+    void insert(P data) {
+        Node* newNode = new Node;
+        newNode->data = data;
+        newNode->left = nullptr;
+        newNode->right = nullptr;
+
+        if (empty()) {
+            tree->root = newNode;
+        } else {
+            Node* currentNode = tree->root;
+            while (true) {
+                if (data < currentNode->data) {
+                    if (currentNode->left == nullptr) {
+                        currentNode->left = newNode;
+                        break;
+                    } else {
+                        currentNode = currentNode->left;
+                    }
+                } else if (data > currentNode->data) {
+                    if (currentNode->right == nullptr) {
+                        currentNode->right = newNode;
+                        break;
+                    } else {
+                        currentNode = currentNode->right;
+                    }
+                } else {
+                    delete newNode;
+                    break;
+                }
+            }
+        }
+    }
+
+    void pop(P value) {
+        if(!find(value)) {
+            throw runtime_error("No puede extraer un elemento que no existe");
+        }
+
+        vector<P> result = preorderTraversal();
+
+        clear();
+
+        for (auto i : result) {
+            if (i != value) insert(i);
+        }
+    }
+
+    bool find(P value) {
+        vector<P> result = inorderTraversal();
+        auto it = std::find(result.begin(), result.end(), value);
+        return it != result.end() ? true : false;
+    }
+
+    bool empty() {
+        return tree->root == nullptr ? true : false;
+    }
+
+    void clear(Node* node = nullptr) {
+        if (node == nullptr) {
+            node = tree->root;
+        }
+
+        if (node == nullptr) {
+            return;
+        }
+
+        if (node->left != nullptr) clear(node->left);
+        if (node->right != nullptr) clear(node->right);
+
+        delete node;
+
+        tree->root = nullptr;
+    }
+
+
+    int height(Node* node = nullptr) {
+        if (node == nullptr) {
+            node = tree->root;
+        }
+        
+        int height = 0;
+        int number_nodes = size(node);
+        while (maxSize(height) < number_nodes) {
+            height++;
+        }
+
+        return height;
+    }
+
+    int size(Node* node = nullptr) {
+        if (node == nullptr) {
+            node = tree->root;
+        }
+
+        int size = 0;
+        vector<P> result = inorderTraversal(node);
+        size = result.size();
+        return size;
+    }
+
+    vector<P> preorderTraversal(Node* node = nullptr) {
+        if (node == nullptr) {
+            node = tree->root;
+        }
+
+        vector<P> result;
+
+        if (empty()) {
+            return result;
+        }
+
+        preorderTraversal(node, result);
+        return result;
+    }
+
+    vector<P> inorderTraversal(Node* node = nullptr) {
+        if (node == nullptr) {
+            node = tree->root;
+        }
+
+        vector<P> result;
+
+        if (empty()) {
+            return result;
+        }
+
+        inorderTraversal(node, result);
+        return result;
+    }
+
+    vector<P> postorderTraversal(Node* node = nullptr) {
+        if (node == nullptr) {
+            node = tree->root;
+        }
+
+        vector<P> result;
+
+        if (empty()) {
+            return result;
+        }
+
+        postorderTraversal(node, result);
+        return result;
+    }
+
+private:
+    void preorderTraversal(Node* node, vector<P>& result) {
+        if (node == nullptr) {
+            return;
+        }
+
+        result.push_back(node->data);
+        preorderTraversal(node->left, result);
+        preorderTraversal(node->right, result);
+    }
+
+    void inorderTraversal(Node* node, vector<P>& result) {
+        if (node == nullptr) {
+            return;
+        }
+
+        if (node->left != nullptr) inorderTraversal(node->left, result);
+        result.push_back(node->data);
+        if (node->right != nullptr) inorderTraversal(node->right, result);
+    }
+
+    void postorderTraversal(Node* node, vector<P>& result) {
+        if (node == nullptr) {
+            return;
+        }
+
+        postorderTraversal(node->left, result);
+        postorderTraversal(node->right, result);
+        result.push_back(node->data);
+    }
+
+    bool leaf(Node* node) {
+        if (node->left == nullptr && node->right == nullptr) return true;
+        return false;
+    }
+
+    int maxSize(int h) {
+        int value = pow(2, h) -1;
+        return value;
+    }
+};
 
 class StringTools {
 public:
@@ -588,67 +801,5 @@ private:
             pos += replace.length();
         }
     }
-};
-
-
-class RandomTools {
-public:
-    RandomTools() : engine_(rd_()) {}
-
-    int randomInt(int cota_a, int cota_b = 0) {
-        std::uniform_int_distribution<int> dist(cota_a, cota_b);
-        return dist(engine_);
-    }
-
-    std::vector<int> randomIntVector(int len, int cota_a, int cota_b = 0) {
-        std::vector<int> vec;
-
-        for (int i = 0; i < len; i++) {
-            vec.push_back(randomInt(cota_a, cota_b));
-        }
-
-        return vec;
-    }
-
-    float randomFloat(float cota_a, float cota_b) {
-        std::uniform_real_distribution<float> dist(cota_a, cota_b);
-        return dist(engine_);
-    }
-
-    std::vector<float> randomFloatVector(int len, float cota_a, float cota_b) {
-        std::vector<float> vec;
-
-        for (int i = 0; i < len; i++) {
-            vec.push_back(randomFloat(cota_a, cota_b));
-        }
-
-        return vec;
-    }
-
-    char randomChar() {
-        std::uniform_int_distribution<int> dist(97, 122);
-        char atom = (char) (dist(engine_));
-        return atom;
-    }
-
-    std::string randomString(int len) {
-        std::string data = "";
-
-        for (int i = 0; i < len; i++) {
-            data.push_back(randomChar());
-        }
-
-        return data;
-    }
-
-    bool randomBool() {
-        std::uniform_int_distribution<int> dist(0, 1);
-        bool truth = dist(engine_) == 1 ? true : false;
-        return truth;
-    }
-
-private:
-    std::random_device rd_;
-    std::mt19937 engine_;
 };
 #endif
