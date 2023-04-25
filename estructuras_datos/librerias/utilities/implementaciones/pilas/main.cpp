@@ -1,31 +1,34 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../utilities.h"
+
+#define MAX 11
 
 using namespace std;
 
 int main() {
-    StackTools<int> myStack;
+    srand(time(nullptr));
+    StackTools<int> myStack("data.bin");
+    
+    for (int i = 0; i < 10; i++) {
+        myStack.push(rand() % MAX);
+    }
 
-    myStack.push(1);
-    myStack.push(2);
-    myStack.push(3);
-    myStack.push(4);
+    cout << "Pila actual: " << myStack << endl;
+
+    int top = myStack.pop();
+    cout << "Elemento superior extraído: " << top << endl;
+
+    cout << "Pila actual: " << myStack << endl;
 
     cout << "Tamaño de la pila: " << myStack.size() << endl;
-    cout << "Contenido de la pila: ";
-    for (int val : myStack.return_stack()) {
-        cout << val << " ";
+
+    if (!myStack.empty()) {
+        cout << "El elemento superior es: " << myStack.peek() << endl;
     }
-    cout << endl;
 
-    cout << "Valor en la parte superior de la pila: " << myStack.peek() << endl;
-
-    int poppedVal = myStack.pop();
-    cout << "Elemento extraído de la pila: " << poppedVal << endl;
-
-    myStack.clear();
-    cout << "La pila está vacía: " << myStack.empty() << endl;
-    cout << "Tamaño después de limpiar: " << myStack.size() << endl; // Debería imprimir "0"
+    cout << "Pila actual: " << myStack << endl;
 
     return 0;
 }
