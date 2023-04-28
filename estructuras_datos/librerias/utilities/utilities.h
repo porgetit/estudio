@@ -1,5 +1,5 @@
-#ifndef UTILIDADES_H
-#define UTILIDADES_H
+#ifndef UTILITIES_H
+#define UTILITIES_H
 
 #include <iostream>
 #include <string>
@@ -11,7 +11,6 @@
 #include <stdexcept>
 
 using namespace std;
-
 
 template<typename T>
 class StackTools {
@@ -28,47 +27,48 @@ public:
 
     Stack* stack;
 
-    // Declaración del operador de inserción de flujo como función amiga
-    friend std::ostream& operator<<(std::ostream& os, const StackTools<T>& stack) {
+    // // Declaración del operador de inserción de flujo como función amiga
+    // friend std::ostream& operator<<(std::ostream& os, const StackTools<T>& stack) {
 
-        vector<T> content = stack.return_stack();
+    //     vector<T> content = stack.return_stack();
 
-        for (const T& item : content) {
-            os << item << " ";
-        }
+    //     for (const T& item : content) {
+    //         os << item << " ";
+    //     }
 
-        return os;
-    }
+    //     return os;
+    // }
 
     // Constructor
-    StackTools(string filename = "") {
+    // StackTools(string filename = "") {
+    StackTools() {
         stack = new Stack;
         stack->top = nullptr;
 
-        if (filename != "") {
-            // Indicar el manejo de archivos internamente
-            is_binary = true;
+        // if (filename != "") {
+        //     // Indicar el manejo de archivos internamente
+        //     is_binary = true;
 
-            // Verificar la extensión del archivo
-            if (filename.substr(filename.find_last_of(".") +1) != "bin") {
-                throw runtime_error("La extensión del archivo debe ser \".bin\"");
-            }
+        //     // Verificar la extensión del archivo
+        //     if (filename.substr(filename.find_last_of(".") +1) != "bin") {
+        //         throw runtime_error("La extensión del archivo debe ser \".bin\"");
+        //     }
 
-            vector<T> content = read_from_file(filename);
+        //     vector<T> content = read_from_file(filename);
 
-            for (auto i = content.rbegin(); i != content.rend(); i++) {
-                push(*i);
-            }
-        }
+        //     for (auto i = content.rbegin(); i != content.rend(); i++) {
+        //         push(*i);
+        //     }
+        // }
     }
 
     // Destructor
     ~StackTools() {
         if (!empty()) {
-            if (is_binary) {
-                write_to_file("temp.bin");
-                rename("temp.bin", "data.bin");
-            }
+            // if (is_binary) {
+            //     write_to_file("temp.bin");
+            //     rename("temp.bin", "data.bin");
+            // }
 
             clear();
         }
@@ -146,54 +146,54 @@ public:
 private:
     bool is_binary = false;
 
-    void write_to_file(string filename) {
-        ofstream outfile(filename, ios::out | ios::binary);
+    // void write_to_file(string filename) {
+    //     ofstream outfile(filename, ios::out | ios::binary);
 
-        if (!outfile) {
-            cerr << "Error al abrir el archivo " << filename << " para escritura binaria." << endl;
-            return;
-        }
+    //     if (!outfile) {
+    //         cerr << "Error al abrir el archivo " << filename << " para escritura binaria." << endl;
+    //         return;
+    //     }
 
-        // Escribir la cantidad de elementos de la pila en el archivo
-        int n = size();
-        outfile.write(reinterpret_cast<char*>(&n), sizeof(n));
+    //     // Escribir la cantidad de elementos de la pila en el archivo
+    //     int n = size();
+    //     outfile.write(reinterpret_cast<char*>(&n), sizeof(n));
 
-        // Escribir cada elemento de la pila en el archivo
-        Node* currentNode = stack->top;
-        while (currentNode != nullptr) {
-            T data = currentNode->data;
-            outfile.write(reinterpret_cast<char*>(&data), sizeof(T));
-            currentNode = currentNode->next;
-        }
+    //     // Escribir cada elemento de la pila en el archivo
+    //     Node* currentNode = stack->top;
+    //     while (currentNode != nullptr) {
+    //         T data = currentNode->data;
+    //         outfile.write(reinterpret_cast<char*>(&data), sizeof(T));
+    //         currentNode = currentNode->next;
+    //     }
 
-        outfile.close();
-    }
+    //     outfile.close();
+    // }
 
-    vector<T> read_from_file(string filename) {
-        vector<T> content;
+    // vector<T> read_from_file(string filename) {
+    //     vector<T> content;
 
-        ifstream infile(filename, ios::in | ios::binary);
+    //     ifstream infile(filename, ios::in | ios::binary);
 
-        if (!infile) {
-            cerr << "Error al abrir el archivo " << filename << " para lectura binaria." << endl;
-            return content;
-        }
+    //     if (!infile) {
+    //         cerr << "Error al abrir el archivo " << filename << " para lectura binaria." << endl;
+    //         return content;
+    //     }
 
-        // Leer la cantidad de elementos de la pila del archivo
-        int n;
-        infile.read(reinterpret_cast<char*>(&n), sizeof(n));
+    //     // Leer la cantidad de elementos de la pila del archivo
+    //     int n;
+    //     infile.read(reinterpret_cast<char*>(&n), sizeof(n));
 
-        // Leer cada elemento de la pila del archivo y agregarlo al vector
-        for (int i = 0; i < n; i++) {
-            T data;
-            infile.read(reinterpret_cast<char*>(&data), sizeof(T));
-            content.push_back(data);
-        }
+    //     // Leer cada elemento de la pila del archivo y agregarlo al vector
+    //     for (int i = 0; i < n; i++) {
+    //         T data;
+    //         infile.read(reinterpret_cast<char*>(&data), sizeof(T));
+    //         content.push_back(data);
+    //     }
 
-        infile.close();
+    //     infile.close();
 
-        return content;
-    }
+    //     return content;
+    // }
 };
 
 
@@ -212,48 +212,49 @@ public:
 
     Queue* queue;
 
-    // Declaración del operador de inserción de flujo como función amiga
-    friend std::ostream& operator<<(std::ostream& os, const QueueTools<U>& queue) {
+    // // Declaración del operador de inserción de flujo como función amiga
+    // friend std::ostream& operator<<(std::ostream& os, const QueueTools<U>& queue) {
 
-        vector<U> content = queue.return_queue();
+    //     vector<U> content = queue.return_queue();
 
-        for (const U& item : content) {
-            os << item << " ";
-        }
+    //     for (const U& item : content) {
+    //         os << item << " ";
+    //     }
 
-        return os;
-    }
+    //     return os;
+    // }
 
     // Constructor
-    QueueTools(string filename = "") {
+    // QueueTools(string filename = "") {
+    QueueTools() {
         queue = new Queue;
         queue->front = nullptr;
         queue->back = nullptr;
 
-        if (filename != "") {
-            // Indicar el manejo de archivo internamente
-            is_binary = true;
+        // if (filename != "") {
+        //     // Indicar el manejo de archivo internamente
+        //     is_binary = true;
 
-            // Verificar la extensión del archivo
-            if (filename.substr(filename.find_last_of(".") +1) != "bin")  {
-                throw runtime_error("La extensión del archivo debe ser \".bin\"");
-            }
+        //     // Verificar la extensión del archivo
+        //     if (filename.substr(filename.find_last_of(".") +1) != "bin")  {
+        //         throw runtime_error("La extensión del archivo debe ser \".bin\"");
+        //     }
 
-            vector<U> content = read_from_file(filename);
+        //     vector<U> content = read_from_file(filename);
 
-            for (auto i = content.rbegin(); i != content.rend(); i++) {
-                push(*i);
-            }
-        }
+        //     for (auto i = content.rbegin(); i != content.rend(); i++) {
+        //         push(*i);
+        //     }
+        // }
     }
 
     // Destructor
     ~QueueTools() {
         if (!empty()) {
-            if (is_binary) {
-                write_to_file("temp.bin");
-                rename("temp.bin", "data.bin");
-            }
+            // if (is_binary) {
+            //     write_to_file("temp.bin");
+            //     rename("temp.bin", "data.bin");
+            // }
 
             clear();
         }
@@ -327,7 +328,7 @@ public:
         }
     }
 
-    vector<U> return_queue() { 
+    vector<U> return_queue() const { 
         vector<U> content;
 
         Node* currentNode = queue->front;
@@ -353,54 +354,54 @@ public:
 private:
     bool is_binary = false;
 
-    void write_to_file(string filename) {
-        ofstream outfile(filename, ios::out | ios::binary);
+    // void write_to_file(string filename) {
+    //     ofstream outfile(filename, ios::out | ios::binary);
 
-        if (!outfile) {
-            cerr << "Error al abrir el archivo " << filename << " para escritura binaria." << endl;
-            return;
-        }
+    //     if (!outfile) {
+    //         cerr << "Error al abrir el archivo " << filename << " para escritura binaria." << endl;
+    //         return;
+    //     }
 
-        // Escribir la cantidad de elementos de la cola en el archivo
-        int n = size();
-        outfile.write(reinterpret_cast<char*>(&n), sizeof(n));
+    //     // Escribir la cantidad de elementos de la cola en el archivo
+    //     int n = size();
+    //     outfile.write(reinterpret_cast<char*>(&n), sizeof(n));
 
-        // Escribir cada elemento de la cola en el archivo
-        Node* currentNode = queue->front;
-        while (currentNode != nullptr) {
-            U data = currentNode->data;
-            outfile.write(reinterpret_cast<char*>(&data), sizeof(U));
-            currentNode = currentNode->next;
-        }
+    //     // Escribir cada elemento de la cola en el archivo
+    //     Node* currentNode = queue->front;
+    //     while (currentNode != nullptr) {
+    //         U data = currentNode->data;
+    //         outfile.write(reinterpret_cast<char*>(&data), sizeof(U));
+    //         currentNode = currentNode->next;
+    //     }
 
-        outfile.close();
-    }
+    //     outfile.close();
+    // }
 
-    vector<U> read_from_file(string filename) {
-        vector<U> content;
+    // vector<U> read_from_file(string filename) {
+    //     vector<U> content;
 
-        ifstream infile(filename, ios::in | ios::binary);
+    //     ifstream infile(filename, ios::in | ios::binary);
 
-        if (!infile) {
-            cerr << "Error al abrir el archivo " << filename << " para lectura binaria." << endl;
-            return content;
-        }
+    //     if (!infile) {
+    //         cerr << "Error al abrir el archivo " << filename << " para lectura binaria." << endl;
+    //         return content;
+    //     }
 
-        // Leer la cantidad de elementos de la cola del archivo
-        int n;
-        infile.read(reinterpret_cast<char*>(&n), sizeof(n));
+    //     // Leer la cantidad de elementos de la cola del archivo
+    //     int n;
+    //     infile.read(reinterpret_cast<char*>(&n), sizeof(n));
 
-        // Leer cada elemento de la cola del archivo y agregarlo al vector
-        for (int i = 0; i < n; i++) {
-            U data;
-            infile.read(reinterpret_cast<char*>(&data), sizeof(U));
-            content.push_back(data);
-        }
+    //     // Leer cada elemento de la cola del archivo y agregarlo al vector
+    //     for (int i = 0; i < n; i++) {
+    //         U data;
+    //         infile.read(reinterpret_cast<char*>(&data), sizeof(U));
+    //         content.push_back(data);
+    //     }
 
-        infile.close();
+    //     infile.close();
 
-        return content;
-    }
+    //     return content;
+    // }
 };
 
 
@@ -419,47 +420,48 @@ public:
 
     List* list;
 
-    // Declaración del operador de inserción de flujo como función amiga
-    friend std::ostream& operator<<(std::ostream& os, const ListTools<V>& list) {
+    // // Declaración del operador de inserción de flujo como función amiga
+    // friend std::ostream& operator<<(std::ostream& os, const ListTools<V>& list) {
 
-        vector<V> content = list.completeList();
+    //     vector<V> content = list.completeList();
 
-        for (const V& item : content) {
-            os << item << " ";
-        }
+    //     for (const V& item : content) {
+    //         os << item << " ";
+    //     }
 
-        return os;
-    }
+    //     return os;
+    // }
 
     // Constructor de clase
-    ListTools(string filename = "") {
+    // ListTools(string filename = "") {
+    ListTools() {
         list = new List;
         list->head = nullptr;
 
-        if (filename != "") {
-            // Indicar el manejo de archivos internamente
-            is_binary = true;
+        // if (filename != "") {
+        //     // Indicar el manejo de archivos internamente
+        //     is_binary = true;
 
-            // Verificar la extensión del archivo
-            if (filename.substr(filename.find_last_of(".") +1) != "bin") {
-                throw runtime_error("La extensión del archivo debe ser \".bin\"");
-            }
+        //     // Verificar la extensión del archivo
+        //     if (filename.substr(filename.find_last_of(".") +1) != "bin") {
+        //         throw runtime_error("La extensión del archivo debe ser \".bin\"");
+        //     }
 
-            vector<V> content = read_from_file(filename);
+        //     vector<V> content = read_from_file(filename);
 
-            for (auto i = content.rbegin(); i != content.rend(); i++) {
-                append(*i);
-            }
-        }
+        //     for (auto i = content.rbegin(); i != content.rend(); i++) {
+        //         append(*i);
+        //     }
+        // }
     }
 
     // Destructor de clase
     ~ListTools() {
         if (!empty()) {
-            if (is_binary) {
-                write_to_file("temp.bin");
-                rename("temp.bin", "data.bin");
-            }
+            // if (is_binary) {
+            //     write_to_file("temp.bin");
+            //     rename("temp.bin", "data.bin");
+            // }
 
             clear();
         }
@@ -711,59 +713,59 @@ public:
 private:
     bool is_binary = false;
 
-    void write_to_file(string filename) {
-        ofstream outfile(filename, ios::out | ios::binary);
+    // void write_to_file(string filename) {
+    //     ofstream outfile(filename, ios::out | ios::binary);
 
-        if (!outfile) {
-            cerr << "Error al abrir el archivo " << filename << " para escritura binaria." << endl;
-            return;
-        }
+    //     if (!outfile) {
+    //         cerr << "Error al abrir el archivo " << filename << " para escritura binaria." << endl;
+    //         return;
+    //     }
 
-        // Escribir la cantidad de elementos de la pila en el archivo
-        int n = size();
-        outfile.write(reinterpret_cast<char*>(&n), sizeof(n));
+    //     // Escribir la cantidad de elementos de la lista en el archivo
+    //     int n = size();
+    //     outfile.write(reinterpret_cast<char*>(&n), sizeof(n));
 
-        // Escribir cada elemento de la pila en el archivo
-        Node* currentNode = stack->top;
-        while (currentNode != nullptr) {
-            V data = currentNode->data;
-            outfile.write(reinterpret_cast<char*>(&data), sizeof(V));
-            currentNode = currentNode->next;
-        }
+    //     // Escribir cada elemento de la lista en el archivo
+    //     Node* currentNode = list->head;
+    //     while (currentNode != nullptr) {
+    //         V data = currentNode->data;
+    //         outfile.write(reinterpret_cast<char*>(&data), sizeof(V));
+    //         currentNode = currentNode->next;
+    //     }
 
-        outfile.close();
-    }
+    //     outfile.close();
+    // }
 
-    vector<V> read_from_file(string filename) {
-        vector<V> content;
+    // vector<V> read_from_file(string filename) {
+    //     vector<V> content;
 
-        ifstream infile(filename, ios::in | ios::binary);
+    //     ifstream infile(filename, ios::in | ios::binary);
 
-        if (!infile) {
-            cerr << "Error al abrir el archivo " << filename << " para lectura binaria." << endl;
-            return content;
-        }
+    //     if (!infile) {
+    //         cerr << "Error al abrir el archivo " << filename << " para lectura binaria." << endl;
+    //         return content;
+    //     }
 
-        // Leer la cantidad de elementos de la pila del archivo
-        int n;
-        infile.read(reinterpret_cast<char*>(&n), sizeof(n));
+    //     // Leer la cantidad de elementos de la pila del archivo
+    //     int n;
+    //     infile.read(reinterpret_cast<char*>(&n), sizeof(n));
 
-        // Leer cada elemento de la pila del archivo y agregarlo al vector
-        for (int i = 0; i < n; i++) {
-            V data;
-            infile.read(reinterpret_cast<char*>(&data), sizeof(V));
-            content.push_back(data);
-        }
+    //     // Leer cada elemento de la pila del archivo y agregarlo al vector
+    //     for (int i = 0; i < n; i++) {
+    //         V data;
+    //         infile.read(reinterpret_cast<char*>(&data), sizeof(V));
+    //         content.push_back(data);
+    //     }
 
-        infile.close();
+    //     infile.close();
 
-        return content;
-    }
+    //     return content;
+    // }
 };
 
 
 template<typename P>
-class TreeTools {
+class BSTreeTools {
 public:
     struct Node {
         P data;
@@ -777,47 +779,48 @@ public:
 
     Tree* tree;
 
-    // Declaración del operador de inserción de flujo como función amiga
-    friend std::ostream& operator<<(std::ostream& os, const TreeTools<P>& tree) {
+    // // Declaración del operador de inserción de flujo como función amiga
+    // friend std::ostream& operator<<(std::ostream& os, const TreeTools<P>& tree) {
 
-        vector<P> content = tree.preorderTraversal();
+    //     vector<P> content = tree.preorderTraversal();
 
-        for (const P& item : content) {
-            os << item << " ";
-        }
+    //     for (const P& item : content) {
+    //         os << item << " ";
+    //     }
 
-        return os;
-    }
+    //     return os;
+    // }
 
     // Constructor de clase
-    TreeTools() {
+    // TreeTools(string filename = "") {
+    BSTreeTools(string filename = "") {
         tree = new Tree;
         tree->root = nullptr;
 
-        if (filename != "") {
-            // Indicar el manejo de archivos internamente
-            is_binary = true;
+        // if (filename != "") {
+        //     // Indicar el manejo de archivos internamente
+        //     is_binary = true;
 
-            // Verificar la extensión del archivo
-            if (filename.substr(filename.find_last_of(".") +1) != "bin") {
-                throw runtime_error("La extensión del archivo debe ser \".bin\"");
-            }
+        //     // Verificar la extensión del archivo
+        //     if (filename.substr(filename.find_last_of(".") +1) != "bin") {
+        //         throw runtime_error("La extensión del archivo debe ser \".bin\"");
+        //     }
 
-            vector<P> content = read_from_file(filename);
+        //     vector<P> content = read_from_file(filename);
 
-            for (auto i = content.rbegin(); i != content.rend(); i++) {
-                insert(*i);
-            }
-        }
+        //     for (auto i = content.rbegin(); i != content.rend(); i++) {
+        //         insert(*i);
+        //     }
+        // }
     }
 
     // Destructor de clase
-    ~TreeTools() {
+    ~BSTreeTools() {
         if (!empty()) {
-            if (is_binary) {
-                write_to_file("temp.bin");
-                rename("temp.bin", "data.bin");
-            }
+            // if (is_binary) {
+            //     write_to_file("temp.bin");
+            //     rename("temp.bin", "data.bin");
+            // }
 
             clear();
         }
@@ -1078,42 +1081,42 @@ private:
 
     bool is_binary = false;
 
-    void write_to_file(string filename) {
-        ofstream file(filename, ios::binary);
+    // void write_to_file(string filename) {
+    //     ofstream file(filename, ios::binary);
 
-        if (!file.is_open()) {
-            throw runtime_error("No se puede abrir el archivo");
-        }
+    //     if (!file.is_open()) {
+    //         throw runtime_error("No se puede abrir el archivo");
+    //     }
 
-        vector<P> content = preorderTraversal();
+    //     vector<P> content = preorderTraversal();
 
-        for (const P& item : content) {
-            file.write(reinterpret_cast<const char*>(&item), sizeof(item));
-        }
+    //     for (const P& item : content) {
+    //         file.write(reinterpret_cast<const char*>(&item), sizeof(item));
+    //     }
 
-        file.close();
-    }
+    //     file.close();
+    // }
 
 
-    vector<P> read_from_file(string filename) {
-        vector<P> content;
-        std::ifstream input(filename, std::ios::binary);
-        if (input) {
-            while (true) {
-                P value;
-                input >> value;
-                if (input.eof()) {
-                    break;
-                }
-                content.push_back(value);
-            }
-            input.close();
-        } else {
-            throw runtime_error("Error al abrir el archivo");
-        }
+    // vector<P> read_from_file(string filename) {
+    //     vector<P> content;
+    //     std::ifstream input(filename, std::ios::binary);
+    //     if (input) {
+    //         while (true) {
+    //             P value;
+    //             input >> value;
+    //             if (input.eof()) {
+    //                 break;
+    //             }
+    //             content.push_back(value);
+    //         }
+    //         input.close();
+    //     } else {
+    //         throw runtime_error("Error al abrir el archivo");
+    //     }
 
-        return content;
-    }
+    //     return content;
+    // }
 };
 
 

@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    TreeTools<int> miArbol;
+    BSTreeTools<int> miArbol;
 
     miArbol.insert(10); // Inserción de nodos en el árbol
     miArbol.insert(5);

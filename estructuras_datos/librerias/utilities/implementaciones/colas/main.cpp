@@ -1,40 +1,60 @@
 #include <iostream>
-#include "../../utilities.h" // Suponiendo que se encuentra en un archivo llamado QueueTools.h
+#include <cstdlib>
+#include <ctime>
+#include "../../utilities.h"
+
+#define MAX 11
+
 
 using namespace std;
 
 int main() {
-    QueueTools<int> queue;
+    srand(time(nullptr));
 
-    queue.push(10);
-    queue.push(20);
-    queue.push(30);
+    // Crear una cola de enteros
+    QueueTools<int> myQueue;
 
-    cout << "Tamaño: " << queue.size() << endl; // Debería imprimir "3"
+    // Agregar elementos a la cola
+    for (int i = 0; i < 5; i++) {
+        myQueue.push(rand() % MAX);
+    }
 
-    cout << "Primer elemento: " << queue.firstIn() << endl; // Debería imprimir "10"
-
-    cout << "Último elemento: " << queue.lastIn() << endl; // Debería imprimir "30"
-
-    cout << "Elementos: ";
-    for (int elem : queue.return_queue()) {
-        cout << elem << " "; // Debería imprimir "10 20 30"
+    // Imprimir la cola
+    cout << "La cola es: ";
+    for (auto i : myQueue.return_queue()) {
+        cout << i << " ";
     }
     cout << endl;
 
-    int first = queue.pop();
-    cout << "Primer elemento desencolado: " << first << endl; // Debería imprimir "10"
+    // Obtener el primer y último elemento de la cola
+    cout << "El primer elemento es: " << myQueue.firstIn() << endl;
+    cout << "El último elemento es: " << myQueue.lastIn() << endl;
 
-    cout << "Elemetos: ";
-    for (int elem : queue.return_queue()) {
-        cout << elem << " "; // Debería imprimir "20 30"
+    // Sacar elementos de la cola
+    int elem1 = myQueue.pop();
+    int elem2 = myQueue.pop();
+
+    // Imprimir la cola después de sacar elementos
+    cout << "La cola después de sacar elementos es: ";
+    for (auto i : myQueue.return_queue()) {
+        cout << i << " ";
     }
     cout << endl;
 
-    queue.clear();
+    // Agregar más elementos a la cola
+    for (int i = 0; i < 2; i++) {
+        myQueue.push(rand() % MAX);
+    }
 
-    cout << "Tamaño después de limpiar: " << queue.size() << endl; // Debería imprimir "0"
+    // Imprimir la cola nuevamente
+    cout << "La cola ahora es: ";
+    for (auto i : myQueue.return_queue()) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    // Obtener el tamaño de la cola
+    cout << "El tamaño de la cola es: " << myQueue.size() << endl;
 
     return 0;
 }
-

@@ -3,46 +3,54 @@
 #include <ctime>
 #include "../../utilities.h"
 
+#define MAX 11
+
 using namespace std;
 
 int main() {
     srand(time(nullptr));
+    ListTools<int> mylist;
 
-    ListTools<int> myList;
-
-    for (int i = 0; i < 10; i++) {
-        myList.append(i);
+    for (int i = 0; i < 5; i++) {
+        mylist.append(rand() % MAX);
     }
 
-    for (auto i : myList.completeList()) {
+    cout << "Lista original: ";
+    for (auto i : mylist.completeList() ) {
         cout << i << " ";
     }
-
     cout << endl;
 
-    myList.clear();
+    mylist.insert(1, 4);
 
-    for (int i = 0; i < 10; i++) {
-        myList.append((rand() % 11) + 0);
-    }
-
-    for (auto i : myList.completeList()) {
+    cout << "Lista después de insertar 4: ";
+    for (auto i : mylist.completeList() ) {
         cout << i << " ";
     }
-
     cout << endl;
 
-    myList.bubbleSort('>');
+    mylist.pop();
 
-    for (auto i : myList.completeList()) {
+    cout << "Lista después de eliminar el último elemento: ";
+    for (auto i : mylist.completeList() ) {
         cout << i << " ";
     }
-
     cout << endl;
 
-    myList.bubbleSort('<');
-
-    for (auto i : myList.completeList()) {
-        cout << i << " ";
+    try
+    {
+        mylist.remove(2);
+        cout << "Lista después de eliminar el elemento 2: ";
+        for (auto i : mylist.completeList() ) {
+            cout << i << " ";
+        }
+        cout << endl;
     }
+    catch(const std::exception& e)
+    {
+        cout << "El elemento 2 no está en la lista" << endl;
+    }
+    
+
+    return 0;
 }

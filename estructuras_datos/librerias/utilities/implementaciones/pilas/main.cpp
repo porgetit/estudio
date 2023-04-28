@@ -9,26 +9,32 @@ using namespace std;
 
 int main() {
     srand(time(nullptr));
-    StackTools<int> myStack("data.bin");
+    StackTools<int> myStack;
     
     for (int i = 0; i < 10; i++) {
         myStack.push(rand() % MAX);
     }
 
-    cout << "Pila actual: " << myStack << endl;
+    cout << "Pila actual: ";
+    for (auto i : myStack.return_stack()) {
+        cout << i << " ";
+    }
+    cout << endl;
 
     int top = myStack.pop();
     cout << "Elemento superior extraído: " << top << endl;
 
-    cout << "Pila actual: " << myStack << endl;
+    cout << "Pila actual: ";
+    for (auto i : myStack.return_stack()) {
+        cout << i << " ";
+    }
+    cout << endl;
 
     cout << "Tamaño de la pila: " << myStack.size() << endl;
 
     if (!myStack.empty()) {
         cout << "El elemento superior es: " << myStack.peek() << endl;
     }
-
-    cout << "Pila actual: " << myStack << endl;
 
     return 0;
 }
