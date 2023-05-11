@@ -433,35 +433,39 @@ public:
     // }
 
     // Constructor de clase
-    // ListTools(string filename = "") {
-    ListTools() {
+    ListTools(string filename = "") {
         list = new List;
         list->head = nullptr;
 
-        // if (filename != "") {
-        //     // Indicar el manejo de archivos internamente
-        //     is_binary = true;
+        if (filename != "") {
+            // Verificar la extensión del archivo
+            if (filename.substr(filename.find_last_of(".") +1) != "bin") {
+                throw runtime_error("La extensión del archivo debe ser \".bin\"");
+            }
 
-        //     // Verificar la extensión del archivo
-        //     if (filename.substr(filename.find_last_of(".") +1) != "bin") {
-        //         throw runtime_error("La extensión del archivo debe ser \".bin\"");
-        //     }
+            // Indicar el manejo de archivos internamente
+            is_binary = true;
+            cout << "Trabajando con archivos" << endl;
 
-        //     vector<V> content = read_from_file(filename);
+            vector<V> content = read_from_file(filename);
 
-        //     for (auto i = content.rbegin(); i != content.rend(); i++) {
-        //         append(*i);
-        //     }
-        // }
+            std::reverse(content.begin(), content.end());
+
+            for (auto i = content.rbegin(); i != content.rend(); i++) {
+                append(*i);
+            }
+        }
+
+        
     }
 
     // Destructor de clase
     ~ListTools() {
         if (!empty()) {
-            // if (is_binary) {
-            //     write_to_file("temp.bin");
-            //     rename("temp.bin", "data.bin");
-            // }
+            if (is_binary) {
+                write_to_file("temp.bin");
+                rename("temp.bin", "data.bin");
+            }
 
             clear();
         }
@@ -713,54 +717,54 @@ public:
 private:
     bool is_binary = false;
 
-    // void write_to_file(string filename) {
-    //     ofstream outfile(filename, ios::out | ios::binary);
+    void write_to_file(string filename) {
+        ofstream outfile(filename, ios::out | ios::binary);
 
-    //     if (!outfile) {
-    //         cerr << "Error al abrir el archivo " << filename << " para escritura binaria." << endl;
-    //         return;
-    //     }
+        if (!outfile) {
+            cerr << "Error al abrir el archivo " << filename << " para escritura binaria." << endl;
+            return;
+        }
 
-    //     // Escribir la cantidad de elementos de la lista en el archivo
-    //     int n = size();
-    //     outfile.write(reinterpret_cast<char*>(&n), sizeof(n));
+        // Escribir la cantidad de elementos de la lista en el archivo
+        int n = size();
+        outfile.write(reinterpret_cast<char*>(&n), sizeof(n));
 
-    //     // Escribir cada elemento de la lista en el archivo
-    //     Node* currentNode = list->head;
-    //     while (currentNode != nullptr) {
-    //         V data = currentNode->data;
-    //         outfile.write(reinterpret_cast<char*>(&data), sizeof(V));
-    //         currentNode = currentNode->next;
-    //     }
+        // Escribir cada elemento de la lista en el archivo
+        Node* currentNode = list->head;
+        while (currentNode != nullptr) {
+            V data = currentNode->data;
+            outfile.write(reinterpret_cast<char*>(&data), sizeof(V));
+            currentNode = currentNode->next;
+        }
 
-    //     outfile.close();
-    // }
+        outfile.close();
+    }
 
-    // vector<V> read_from_file(string filename) {
-    //     vector<V> content;
+    vector<V> read_from_file(string filename) {
+        vector<V> content;
 
-    //     ifstream infile(filename, ios::in | ios::binary);
+        ifstream infile(filename, ios::in | ios::binary);
 
-    //     if (!infile) {
-    //         cerr << "Error al abrir el archivo " << filename << " para lectura binaria." << endl;
-    //         return content;
-    //     }
+        if (!infile) {
+            cerr << "Error al abrir el archivo " << filename << " para lectura binaria." << endl;
+            return content;
+        }
 
-    //     // Leer la cantidad de elementos de la pila del archivo
-    //     int n;
-    //     infile.read(reinterpret_cast<char*>(&n), sizeof(n));
+        // Leer la cantidad de elementos de la lista del archivo
+        int n;
+        infile.read(reinterpret_cast<char*>(&n), sizeof(n));
 
-    //     // Leer cada elemento de la pila del archivo y agregarlo al vector
-    //     for (int i = 0; i < n; i++) {
-    //         V data;
-    //         infile.read(reinterpret_cast<char*>(&data), sizeof(V));
-    //         content.push_back(data);
-    //     }
+        // Leer cada elemento de la lista del archivo y agregarlo al vector
+        for (int i = 0; i < n; i++) {
+            V data;
+            infile.read(reinterpret_cast<char*>(&data), sizeof(V));
+            content.push_back(data);
+        }
 
-    //     infile.close();
+        infile.close();
 
-    //     return content;
-    // }
+        return content;
+    }
 };
 
 

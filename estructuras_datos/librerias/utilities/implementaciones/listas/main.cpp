@@ -9,7 +9,7 @@ using namespace std;
 
 int main() {
     srand(time(nullptr));
-    ListTools<int> mylist;
+    ListTools<int> mylist("data.bin");
 
     for (int i = 0; i < 5; i++) {
         mylist.append(rand() % MAX);
