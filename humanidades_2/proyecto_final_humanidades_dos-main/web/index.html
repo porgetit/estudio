@@ -1,0 +1,309 @@
+<!-- &#162; Es el simbolo que usaré para la modena (creditos) -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Homo Deus Newspaper</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" media="all" href="./src/css/background.css">
+    <link rel="icon" type="image/x-icon" href="./src/icon/favicon.ico">
+	<style>
+        /* Tipografias para títulos y párrafos*/
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Serif:opsz,wght@8..144,500&display=swap');
+        /* Montserrat para títulos. Roboto serif para párrafos */
+		body {
+            font-family: 'Montserrat', sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+        header {
+            margin-bottom: 5vh;
+        }
+		header, footer {
+            margin: 0;
+			background-color: rgba(51, 51, 51, 0.9);
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+		}
+        main {
+            margin: 0 auto;
+            width: 80%;
+            max-width: 1200px;
+        }
+		article {
+            border: none;
+            border-bottom: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+        }
+		h2 {
+			font-size: 2.5em;
+		}
+        h3 {
+            font-size: 1.5em;
+            text-align: center;
+        }
+		p {
+            text-align: justify;
+			line-height: 1.5;
+            font-family: 'Roboto Serif', serif;
+		}
+        article img {
+            margin: 0 10%;
+            width: 80%;
+        }
+        p#introduction {
+            width: 60%;
+            margin: 0 auto;
+            margin-bottom: 2vh;
+        }
+        div.firmContainer p {
+            text-align: right;
+        }
+        div.titleContainer h2 {
+            text-align: center;
+        }
+        footer div.reflexionContainer {
+            width: 100%;
+        }
+        footer div.reflexionContainer p {
+            width: 62%;
+            margin: 2vh auto;
+        }
+
+        /* Reglas de medios para dispositivos móviles */
+        @media only screen and (max-width: 600px) {
+            article {
+                width: 95%;
+                margin: 1vh 0;
+                padding: 2.5%;
+                border: none;
+            }
+            article img {
+                max-width: 100%;
+                height: auto;
+            }
+            main {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            header {
+                display: grid;
+                place-items: center;
+                height: 100vh;
+                padding: 0;
+                margin: 0;
+                margin-bottom: 5vh;
+            }
+            footer div.reflexionContainer p {
+                width: 100%;
+            }
+            h3 {
+                text-align: left;
+            }
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff; /* Puedes cambiar el color de fondo según tus preferencias */
+            z-index: 9999; /* Asegúrate de que el preloader esté en la capa superior */
+            /* Estilos adicionales para centrar el contenido verticalmente */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }  
+
+        #preloader::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 4px solid #ccc; /* Puedes cambiar el color del borde según tus preferencias */
+            border-top-color: #333; /* Puedes cambiar el color del borde superior según tus preferencias */
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+	</style>
+</head>
+<body>
+
+    <script>
+        window.addEventListener('load', function() {
+            // Cuando la página y todos los recursos se hayan cargado completamente, oculta el preloader
+            var preloader = document.getElementById('preloader');
+            preloader.style.display = 'none';
+        });
+    </script>
+
+    <div id="preloader">
+        <!-- Aquí puedes agregar el contenido del preloader, como una animación o un mensaje -->
+    </div>
+    
+    <header>
+        <h1>Homo Deus Newspaper</h1>
+        <p id="introduction">En el año 2173, la sociedad humana se enfrenta a una serie de desafíos sin precedentes. El cambio climático ha provocado migraciones masivas de personas, mientras que los avances tecnológicos han creado una sociedad altamente automatizada, en la que los robots y la IA realizan gran parte del trabajo. Las pandemias y la salud pública son una preocupación constante, mientras que la identidad cultural se encuentra en un estado de cambio constante. <br>- ChatGPT</p>
+    </header>
+
+    <main>
+        <article>
+            <div class="titleContainer">
+                <h2>Revolución en las fábricas: costos de producción caen a mínimos históricos.</h2>
+            </div>
+            <img src="./src/img/pexels-merlin-lightpainting-10996844.jpg" alt="Patrón Cyber" title="Foto de Merlin Lightpainting: https://www.pexels.com/es-es/foto/modelo-textura-abstracto-colorido-10996844/">
+            <h3>
+                Los costos de producción se reducen drásticamente, trabajadores migran en busca de mejor economía.
+            </h3>
+            <p>
+                Los costos de producción en fábricas se han reducido hasta alcanzar la escandaloza cifra de 0,7 &#162;/a (cero coma siete créditos anuales) Los trabajadores humanos de dichas fábricas han decidido migrar hacía nuevos horizontes en busca de una mejor economía. Titán ahora mismo se prepara para recibir al rededor de 10.000 millones de nuevos ciudadanos, lo que la convertirá en el distrito colonia más densamente poblado de la humanidad, después del propio planeta Tierra.
+            </p>
+            <p>
+                El Gobierno Interplanetario a destinado fondos y un grupo de 23.721 profesionales en el áera del transporte espacial para brindar apoyo a la estación orbital lunar Alpha-4 en su camino de servir como puerto de partida para el enorme flujo de migrantes del próximo ciclo. 
+            </p>
+            <p>
+                Se estima que la pérdida de capital humano en la Tierra incentibe a mejores acuerdos económicos y políticos dentro de los demás distritos colonia, siguiendo el ejemplo del gobierno local de Titán. 
+            </p>
+            <div class="firmContainer">
+                <p>Por Xuan Shaft</p>
+            </div>
+        </article>
+
+        <article>
+            <div class="titleContainer">
+                <h2>Prototipo de colector solar de alto desempeño: La solución a las altas demandas energéticas de la humanidad.</h2>
+            </div>
+            <img src="./src/img/jan-haerer-7k7k3WZWggk-unsplash.jpg" alt="Eclipse solar" title="Foto de Jan Haerer en Unsplash">
+            <h3>
+                Kevin Esguerra Cardona anuncia avance tecnológico que marcará un hito en la escala de Kardashev.
+            </h3>
+            <p>
+                El desarrollador en jefe, CEO de la Human Foundation for the Advancement of Humanity y primer Cyber de la historia; Kevin Esguerra Cardona, anunció en su última conferencia del año en la prestigiosa Advancement Expo, llevada a cabo en esta ocasión en la estación Alpha-4, en la Luna, el lanzamiento de un prototipo de colector solar de alto desempeño que, en sus propias palabras, "será el primer paso para avanzar al segundo escalón de la escala de Kardashev".
+            </p>
+            <p>
+                El proyecto busca colocar en órbita estacionaria baja una gigantesca red de colectores solares los cuales son capaces de condensar la energía en una matriz de alta densidad y proyectarla hacía un receptor instalado en el destino. La idea principal es suplir las altas demandas energéticas generadas en la Tierra y todos sus distritos colonia, las cuales ascienden aproximadamente a unas 100 veces las del siglo pasado en promedio. Este prototipo se ha probado en secreto y en repetidas ocaciones en la base de la H.F.A.H. en Mercurio. Los resultados han sido abrumadores, a una distancia relativa de 0,1 UA, unos 15 millones de kilómetros del Sol, relativamente alejado, un solo colector, cuya superficie colectora es de 1 kilómetro cuadrado (casi 32 metros de longitud por cada lado), logró enviar al receptor instalado en el Polo Norte de Mercurio la prometedora cantidad de 13.805.725,2 MW en una hora. Haciendo un cálculo estimado, según los registros historicos del General Bank of Currency and Information del Gobierno Interplanetario, se hace necesaria una red con al menos 12.028 nodos colectores para suplir la necesidad energética de una sociedad de comienzos del siglo pasado. 
+            </p>
+            <p>
+                La co-autora de este desarrollo y lider de la corporación más influyente de los últimos 50 años y esposa del CEO de la H.F.A.H. dijo: "Está claro que aún quedan muchos retos por superar, pero tenemos los recursos, la pasión y la fuerza para hacerlo. Fe al tiempo."
+            </p>
+            <div class="firmContainer">
+                <p>Por Äba Guhxeg</p>
+            </div>
+        </article>
+
+        <article>
+            <div class="titleContainer">
+                <h2>Virus Kratos: La epidemia digital que amenaza el ciberespacio del siglo XXII.</h2>
+            </div>
+            <img src="./src/img/pexels-markus-spiske-3970330.jpg" alt="Virus informático" title="Foto de Markus Spiske: https://www.pexels.com/es-es/foto/tecnologia-numeros-emergencia-alarma-3970330/">
+            <h3>
+                El virus Kratos se propaga de manera alarmante en el ciberespacio del siglo XXII, amenazando la conciencia digital de los Cybers y desencadenando una carrera contra el tiempo liderada por la H.F.A.H para combatir sus efectos devastadores.
+            </h3>
+            <p>
+                En el inmenso ciberespacio del siglo XXII, donde el internet ha evolucionado de manera extraordinaria, se desata una amenaza que cobra dimensiones alarmantes: el virus Kratos. Este intruso virtual ha capturado la atención de investigadores y expertos, siendo catalogado como una verdadera epidemia digital. Con una capacidad asombrosa para infiltrarse y manipular la conciencia de los Cybers, este temible virus se ha convertido en un flagelo que amenaza con causar daños irreparables en los datos y la psique de quienes caen en su red. Sus efectos son devastadores, llevando a la demencia e incluso transformando a los infectados en muertos vivientes virtuales. Ante esta crisis sin precedentes, tanto la sociedad como el Gobierno Interplanetario han emprendido un plan de acción urgente para contener esta amenaza creciente.
+            </p>
+            <p>
+                Según las últimas cifras, se estima que el virus Kratos ha infectado a más de 50 millones de Cybers en todo el ciberespacio. De manera preocupante, se ha reportado un incremento alarmante de muertes virtuales, con un número aproximado de 10 millones de individuos que han sucumbido a los efectos mortales de este virus insidioso. Estas cifras escalofriantes han generado un clima de temor e incertidumbre en toda la sociedad.
+            </p>
+            <p>
+                En respuesta a esta crisis, la Human Foundation for the Advancement of Humanity (H.F.A.H), la principal empresa en investigación tecnológica, ha destinado una inversión de 1.500 millones de créditos en el estudio y combate de esta nueva enfermedad. Los recursos y conocimientos de H.F.A.H se encuentran enfocados en encontrar una solución que asegure la supervivencia de la sociedad digital y los seres humanos reales por igual.
+            </p>
+            <p>
+                Sin embargo, los desafíos persisten y los costos continúan en aumento. La lucha contra el virus Kratos implica una inversión constante y se estima que la H.F.A.H deberá destinar al menos 500 millones de créditos adicionales en los próximos meses para mantener el ritmo de la investigación y combatir esta peligrosa amenaza cibernética. La necesidad de una solución urgente se hace cada vez más imperante, ya que el futuro de la humanidad en el ciberespacio está en juego y los costos en vidas y recursos no pueden ser ignorados.
+            </p>
+            <div class="firmContainer">
+                <p>Por Mei Lingram</p>
+            </div>
+        </article>
+
+        <article>
+            <div class="titleContainer">
+                <h2>Pérdidas económicas astronómicas en juego: la crisis de identidad y su impacto global.</h2>
+            </div>
+            <img src="./src/img/pexels-moritz-böing-932231.jpg" alt="Ser humano confuso" title="Foto de Moritz Böing: https://www.pexels.com/es-es/foto/hombre-con-camisa-negra-932231/">
+            <h3>
+                Una encuesta revela que la crisis de identidad en un porcentaje reducido de la población humana y cibernética podría desencadenar una inversión demográfica con consecuencias económicas y sociales devastadoras, instando a la investigación y cooperación para abordar este desafío emergente.
+            </h3>
+            <p>
+                Según una encuesta conjunta realizada por el área de sociología de la Human Foundation for the Advancement of Humanity (H.F.A.H) y el General Bank of Currency and Information del Gobierno Interplanetario, se ha revelado que un preocupante 5.7% de la población humana no virtualizada y más del 4.5% de los Cybers se enfrentan a una nueva crisis de identidad. Estos individuos están experimentando dificultades debido a que su bienestar emocional se ve afectado por un entorno que no les brinda total comodidad. Aunque actualmente no se considera un problema de gran magnitud, dado que estamos hablando de un porcentaje pequeño en relación a una población que supera los 127 billones de habitantes físicos y 352 millones de habitantes virtuales, los científicos advierten que, si esta tendencia continúa en el próximo siglo, la sociedad humana podría enfrentar una inversión demográfica sin precedentes.
+            </p>
+            <p>
+                Si se produce esta inversión demográfica, se espera una disminución significativa en la actividad comercial, lo que podría ocasionar pérdidas económicas astronómicas. Según estimaciones realizadas por expertos financieros, un escenario de inversión de la población llevaría a una caída en el consumo y la demanda de bienes y servicios, generando una contracción en la economía a una escala global. Se proyecta que las pérdidas económicas podrían ascender a más de 20 trillones de créditos en el transcurso del próximo siglo, afectando gravemente a los mercados financieros y a las empresas en general.
+            </p>
+            <p>
+                Además del impacto económico, una inversión demográfica a tal escala también tendría consecuencias sociales y políticas significativas. La redistribución de la población y el cambio en las dinámicas sociales podrían generar tensiones y desafíos para la gobernanza y la estabilidad social. Se requerirían medidas y políticas adaptativas para mitigar los efectos negativos y fomentar la recuperación económica en un escenario de inversión demográfica.
+            </p>
+            <p>
+                Ante estas perspectivas preocupantes, los investigadores, sociólogos y economistas se encuentran trabajando en estrecha colaboración para comprender mejor las causas y los factores subyacentes de esta crisis de identidad y desarrollar estrategias efectivas para abordarla. La Human Foundation for the Advancement of Humanity (H.F.A.H) ha destinado una inversión adicional de 500 millones de créditos para investigar y encontrar soluciones a este desafío emergente. La cooperación entre sectores y la adopción de políticas proactivas son fundamentales para evitar un escenario desalentador y construir un futuro sostenible para la sociedad humana en su conjunto.
+            </p>
+            <div class="firmContainer">
+                <p>Por Sora Nakamura</p>
+            </div>
+        </article>
+
+        <article>
+            <div class="titleContainer">
+                <h2>Deus Ex Machina: fusionando danza, música y tecnología en la lucha por la unión entre mundos.</h2>
+            </div>
+            <img src="./src/img/ahmad-odeh-JhqhGfX_Wd8-unsplash.jpg" alt="Performance" title="Foto de Ahmad Odeh en Unsplash">
+            <h3>
+                Deus Ex Machina, el colectivo cyber-humano, fusiona el arte y el activismo en impactantes manifestaciones en demanda de la integración entre seres virtuales y físicos a través de la investigación y desarrollo de implantes electromecánicos revolucionarios.
+            </h3>
+            <p>
+                En una impactante convergencia de arte y activismo, el colectivo cyber-humano conocido como Deus Ex Machina [dɛʊs ɛks mɑˈkina] ha llevado sus protestas a nuevas alturas en su búsqueda de una integración física entre los seres humanos virtuales y físicos. Estas manifestaciones, que se extienden por todo el territorio de la humanidad y se entrelazan con el vasto ciberespacio, son un grito apasionado en demanda de una mayor inversión en investigación y desarrollo de implantes electromecánicos revolucionarios.
+            </p>
+            <p>
+                En su lucha por la coexistencia y la unión de ambos mundos, Deus Ex Machina ha transformado sus protestas en un espectáculo artístico impactante. En las calles iluminadas por neones y en los rincones digitales más remotos, estos manifestantes fusionan danza, música y expresiones visuales en una sinfonía de creatividad. Sus cuerpos se contorsionan con gracia y destreza, mientras proyecciones holográficas deslumbrantes envuelven el ambiente con imágenes cautivadoras. Con cada movimiento, transmiten la urgencia y la belleza de su mensaje.
+            </p>
+            <p>
+                Las coreografías enérgicas y envolventes de Deus Ex Machina son un llamado a la atención, una forma de arte que cautiva tanto a los espectadores virtuales como a los físicos. Sus performances callejeras son una combinación de expresión corporal y tecnología, donde los límites entre lo real y lo virtual se desvanecen. A través de este poderoso medio de comunicación, estos seres virtuales exigen que se rompan las barreras que los separan de la realidad física y que se les permita interactuar plenamente con sus contrapartes humanas.
+            </p>
+            <p>
+                Las protestas de Deus Ex Machina han capturado la imaginación y el apoyo de una audiencia diversa y comprometida. Sus intervenciones artísticas no solo son una expresión de su deseo de integración, sino también un llamado a la sociedad y al Gobierno Interplanetario para que aumenten la inversión en investigación y desarrollo de la tan anhelada tecnología de implantes electromecánicos. A través de su arte y su activismo, estos manifestantes buscan desafiar las normas establecidas y abrir nuevas posibilidades para la interacción entre ambos mundos de la humanidad.
+            </p>
+            <p>
+                En un mundo donde la tecnología y el arte se entrelazan, Deus Ex Machina se erige como un faro de esperanza y una fuerza impulsora del cambio. Sus protestas, llenas de pasión y creatividad, no solo buscan la integración física, sino que también despiertan la conciencia de la sociedad sobre la necesidad de avanzar en la investigación y el desarrollo de la tecnología que permita esta tan esperada unión. En sus actuaciones, estos seres virtuales desafían las barreras impuestas y nos recuerdan que el arte puede ser un poderoso medio para el cambio social y la búsqueda de la igualdad entre todas las formas de existencia humana.
+            </p>
+            <div class="firmContainer">
+                <p>Por Aria Valensky</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="reflexionContainer">
+            <p>
+                Al concluir este segundo y esclarecedor curso de humanidades, adquiere una claridad meridiana la profunda influencia que ejerce la información en el pensamiento colectivo, en especial en esta era digital que nos acoge. En este contexto, surge una interrogante trascendental: ¿cómo afrontamos el desafío planteado por tecnologías como ChatGPT, capaces de moldear nuestras formas de comunicación e interacción, y qué implicaciones entraña para nuestra facultad de discernimiento y nuestra libertad de elección?
+            </p>
+            <p>
+                Ante tan crucial interrogante, es crucial no desvanecerse en la desesperanza, sino mantener viva la esperanza de que la humanidad sea capaz de emplear estas herramientas tecnológicas de manera constructiva y transformativa. No obstante, para lograrlo, debemos ejercitar de manera constante nuestra capacidad crítica y reflexiva, de modo que podamos comprender plenamente el impacto que estas tecnologías tienen en nuestra vida diaria y en nuestro proceso educativo.
+            </p>
+            <p>
+                En este sentido, la posición en la que nos encontramos es, sin lugar a dudas, privilegiada. Tenemos la oportunidad única de aprovechar el potencial sin límites que estas nuevas herramientas nos ofrecen y, en consecuencia, forjar un futuro más resplandeciente para la humanidad en su conjunto. Para lograrlo, es necesario que nos adentremos con audacia y resolución en la exploración de los alcances y límites de estas tecnologías, sin perder de vista el horizonte ético y humano que nos guía.
+            </p>
+            <p>
+                En nuestra travesía, nos toca ser navegantes intrépidos en el océano vasto y complejo de la información digital, donde cada interacción, cada elección, constituye un acto de autodeterminación y un paso en la construcción de nuestra realidad compartida. Así, alzamos la voz en defensa de una educación que fomente la agudeza crítica, la capacidad de análisis y la capacidad de discernimiento, equipándonos con las herramientas necesarias para hacer frente a los desafíos y oportunidades que se despliegan ante nosotros.
+            </p>
+            <p>
+                En conclusión, si bien la existencia de tecnologías como ChatGPT plantea retos significativos, no podemos permitir que la incertidumbre nos embargue. Más bien, debemos abrazar el potencial transformador de estas herramientas y comprometernos a utilizarlas de manera responsable y consciente. Al elevar nuestra mirada hacia un futuro en el que la sinergia entre tecnología y humanidad se entrelace en armonía, nos situamos en la vanguardia de la evolución humana y abrimos paso a una era de infinitas posibilidades y realizaciones.
+            </p>
+        </div>
+    </footer>
+
+    
+</body>
+</html>

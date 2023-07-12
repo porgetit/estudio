@@ -50,7 +50,6 @@
         "typeinfo": "cpp",
         "bitset": "cpp",
         "regex": "cpp",
-        "fstream": "cpp",
-        "map": "cpp"
+        "fstream": "cpp"
     }
 }

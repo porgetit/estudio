@@ -1,0 +1,12 @@
+Clave: 1
+Descripción: Differential Calculus
+Créditos: 5
+------------------------
+Clave: 2
+Descripción: Language
+Créditos: 4
+------------------------
+Clave: 3
+Descripción: Linear Algebra
+Créditos: 5
+------------------------

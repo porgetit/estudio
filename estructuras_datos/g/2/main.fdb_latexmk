@@ -1,0 +1,24 @@
+# Fdb version 4
+["pdflatex"] 1686019036 "c:/Users/Kevin/Documents/Estudio/estructuras_datos/g/2/main.tex" "main.pdf" "main" 1686019037 0
+  "c:/Users/Kevin/Documents/Estudio/estructuras_datos/g/2/main.tex" 1686019035 5824 421473ef4c71270705acba26d9d88f94 ""
+  "c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1676140979 35752 024fb6c41858982481f6968b5fc26508 ""
+  "c:/texlive/2022/texmf-dist/tex/generic/babel-spanish/spanish.ldf" 1676141336 26965 3b6d1655ad716f98e788b1fb9f2e87b8 ""
+  "c:/texlive/2022/texmf-dist/tex/generic/babel/babel.sty" 1676141293 151045 349603a2daa2daf4d2a1624b7cb6fe6f ""
+  "c:/texlive/2022/texmf-dist/tex/generic/babel/locale/es/babel-es.ini" 1676141293 4345 33a8cc6f0a7c6afcb84895b2c963a4e5 ""
+  "c:/texlive/2022/texmf-dist/tex/generic/babel/locale/es/babel-spanish.tex" 1676141293 336 a1c472f674f6f0c25a2c95ad8c7ad024 ""
+  "c:/texlive/2022/texmf-dist/tex/generic/babel/txtbabel.def" 1676141293 6927 64b53e78feab932ab94f892bb5a5facf ""
+  "c:/texlive/2022/texmf-dist/tex/latex/base/article.cls" 1676144869 20144 d5ecf0a5140c8d8d8b72cbe86e320eff ""
+  "c:/texlive/2022/texmf-dist/tex/latex/base/inputenc.sty" 1676144869 5048 84b05796b49b69e2d4257d537721c960 ""
+  "c:/texlive/2022/texmf-dist/tex/latex/base/size10.clo" 1676144870 8448 c33a4e1cb35cee9b33c2b21033b73e39 ""
+  "c:/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1676144822 30429 213676d4c7327a21d91ddaed900e7b81 ""
+  "c:/texlive/2022/texmf-dist/web2c/texmf.cnf" 1676140720 40171 cdab547de63d26590bebb3baff566530 ""
+  "c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1676147632 4585694 ba9b64e81ec9a067de5c9dc48dbcff2a ""
+  "c:/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1676293179 6547407 1bcb15ff5b8dc16f6d94ad4921b7da6b ""
+  "c:/texlive/2022/texmf.cnf" 1676147614 713 e69b156964470283e0530f5060668171 ""
+  "main.aux" 1686019037 194 d12d2f42a1ce5499c2e0a2e2f9926e09 "pdflatex"
+  "main.tex" 1686019035 5824 421473ef4c71270705acba26d9d88f94 ""
+  (generated)
+  "main.aux"
+  "main.log"
+  "main.pdf"
+  (rewritten before read)
